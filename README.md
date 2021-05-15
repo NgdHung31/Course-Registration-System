@@ -1,5 +1,4 @@
 # Bai-diem-cong-cuoi-nam
-Config files for my GitHub profile.
 Github không thể chạy chương trình được, hiện tại git hub chỉ là nơi share code \n
 Có thể chỉnh sửa trực tiếp trên này, up code của các bạn lên này và mọi người có thể xem, đặt tên code theo chức năng của code đó, viết code thì vẫn phải viết bằng visual studio
 up thì chỉ cần up file cpp, khi up 1 file chứa hàm trong đó thì m.n vào file header.h mình đã tạo sẵn trong đây và khai báo hàm vào trong đó.

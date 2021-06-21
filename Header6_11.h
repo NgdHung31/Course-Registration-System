@@ -11,7 +11,7 @@ struct course
 	//start date-end date
 	int startDay0;
 	int startMonth0;
-	int endYear0;
+	//int endYear0;
 	int endDay0;
 	int endMonth0;
 	//session
@@ -20,7 +20,7 @@ struct course
 	int secondDay;
 	int secondSession;
 	// info course
-	int courseID;
+	char* courseID;
 	char* courseName;
 	char* teacherName;
 	int numberCredits;
@@ -33,13 +33,7 @@ struct NODE
 	NODE* pNext;
 };
 
-struct LIST
-{
-	NODE* pHead;
-	NODE* pTail;
-};
-
-struct semester
+struct Semester
 {
 	int createASemester;
 	int schoolYear;
@@ -47,18 +41,19 @@ struct semester
 	int startMonth;
 	int endDay;
 	int endMonth;
-	LIST* listCourses;
+	NODE* pHead;
+	NODE* pTail;
 };
 
-void createList(LIST*& l);
+void create_semester(Semester*& se);
 NODE* createNODE(course* data);
-semester* createSemester();
-course* registrationSession(semester*& se, int year);
-course* createCourse();
-void addTail(course* c, LIST*& l);
-void printList(LIST* l);
-void addNode_p_AfterNode_q(course* c, LIST*& l, int& x, NODE* p);
-void deleteCourse(LIST*& l, int& x);
-//bool check_name(char* name1, char* name2);
+void createSemester(Semester*& se);
+course* Create_a_course_registration_session(Semester* se, course* rs);
+void Add_a_course_to_this_semester(Semester*& se , course* c);
+void addTail(Semester*& se, course* c);
+void printList(Semester*& se);
+void Update_information(Semester*& se);
+bool deleteCourse(Semester*& se);
+bool check_name(char* name1, char* name2);
 
 #endif

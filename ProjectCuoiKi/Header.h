@@ -57,4 +57,44 @@ void createClass(School_year*& school, Class*& classes);
 void addClassToSchoolYear(School_year*& sy, Class* cl);
 void inputClass(School_year*& sy);
 void Input_student_to_class(School_year*& school);//****
+
+//6to11
+struct course
+{
+	//start date-end date
+	int startDay0;
+	int startMonth0;
+	//int endYear0;
+	int endDay0;
+	int endMonth0;
+	//session
+	int firstDay;
+	int firstSession;
+	int secondDay;
+	int secondSession;
+	// info course
+	char* courseID;
+	char* courseName;
+	char* teacherName;
+	int numberCredits;
+	int maxStudentCourse;
+};
+
+struct NODE
+{
+	course* data;
+	NODE* pNext;
+};
+
+struct Semester
+{
+	int createASemester;
+	int schoolYear;
+	int startDay;
+	int startMonth;
+	int endDay;
+	int endMonth;
+	NODE* pHead;
+	NODE* pTail;
+};
 #endif

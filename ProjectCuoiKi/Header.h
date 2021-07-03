@@ -56,4 +56,5 @@ void createSchoolYear(School_year*& sy);
 void createClass(School_year*& school, Class*& classes);
 void addClassToSchoolYear(School_year*& sy, Class* cl);
 void inputClass(School_year*& sy);
+void Input_student_to_class(School_year*& school);//****
 #endif

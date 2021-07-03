@@ -39,6 +39,9 @@ int main()
 				inputClass(school);
 				break;
 			}
+			case 3://****
+				Input_student_to_class(school);
+				break;
 			}
 		} while (true);
 	}

@@ -36,6 +36,7 @@ bool checkDate(string day, string month, string year)
 	}
 }
 
+//1-5
 void enterTheName(char*& name)
 {
 	cin.ignore();
@@ -171,3 +172,26 @@ void inputClass(School_year*& sy)
 	createClass(sy, classes);
 	addClassToSchoolYear(sy, classes);
 }
+//*****
+void Input_student_to_class(School_year*& school)
+{
+	char* name;
+	Enter_the_name(name);
+	Node_class* temp = school->head;
+	int k = 0;
+	while (temp != NULL)
+	{
+		if (check_name(temp->data->class_name, name))
+		{
+			k = 1;
+			Student* st = info_student();
+			Add_student_to_class(temp->data, st);
+			cout << "The student has become a part of the class.\n";
+		}
+		temp = temp->next;
+	}
+	if (k == 0)
+		cout << "Students cannot be added to the class. Classroom does not exist! \n";
+}
+
+// 6-11

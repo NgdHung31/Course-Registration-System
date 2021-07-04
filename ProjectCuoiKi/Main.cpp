@@ -54,4 +54,110 @@ int main()
 			}
 		} while (true);
 	}
+
+	if (type == 2)
+	{
+		system("cls");
+		cout << "----------Student----------\n";
+		cout << "1. Register\n";
+		cout << "2. Log in\n";
+		cout << "3. Change password\n";
+		cout << "4. Logout\n";
+		cout << "13. Enroll in a course.\n";
+		cout << "14. View list of enrolled courses.\n";
+		cout << "15. Remove a course from the enrolled list.\n";
+		cout << "16. View list of his/her courses. He/she will study these courses in this semester.\n";
+		cout << "17. View list of classes.\n";
+		cout << "18. View list of students in a class (for example, 20APCS1...)\n";
+		cout << "19. View list of courses.\n";
+		cout << "20. View list of students in a course.";
+
+		do
+		{
+			cout << "\nYour choice: ";
+			cin >> choice2;
+
+			switch (choice2)
+			{
+			case 1:
+			{
+				registerAAcoount();
+				break;
+			}
+			case 2:
+			{
+				string username, password;
+				cout << "Enter the username: ";
+				cin >> username;
+				cout << "Enter the password: ";
+				cin >> password;
+				bool check = checkLoggin(username, password);
+
+				if (check)
+				{
+					cout << "Successfully log in!";
+					cout << endl;
+					st = infoStudent();
+				}
+				else
+				{
+					cout << "Try again! ";
+					system("pause");
+				}
+				break;
+			}
+			case 3:
+			{
+				changePassword();
+				break;
+			}
+			case 4:
+			{
+				break;
+			}
+			case 13:
+			{
+				enrollACourse(se, st, ls, lc);
+				break;
+			}
+			case 14:
+			{
+				outputListOfEnrolledCourse(lc);
+				break;
+			}
+			case 15:
+			{
+				removeACourseFromEnrolledList(lc);
+				break;
+			}
+			case 16:
+			{
+				outputListOfYourCourse(lc);
+				break;
+			}
+			case 17:
+			{
+				outputListOfClasses(school);
+				break;
+			}
+			case 18:
+			{
+				char* name;
+				enterTheNameOfClass(name);
+				outputListOfStudentInAClass(school, name);
+				break;
+			}
+			case 19:
+			{
+				outputListOfCourses(se);
+				break;
+			}
+			case 20:
+			{
+				outputListOfStudentsInACourse(ls);
+				break;
+			}
+			}
+		} while (choice2 != 4);
+	}
 }

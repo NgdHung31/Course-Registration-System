@@ -1,5 +1,20 @@
 #include "Header.h"
 
+void registerAAcoount()
+{
+	string username, password;
+
+	cout << "Sign up a username - (username should be a ID Student Number) : ";
+	cin >> username;
+	cout << "Sign up a password: ";
+	cin >> password;
+
+	ofstream f;
+	f.open("D:\\" + username + ".txt");
+	f << username << endl << password;
+	f.close();
+}
+
 //CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {

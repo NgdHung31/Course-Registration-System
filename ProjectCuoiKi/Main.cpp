@@ -10,6 +10,8 @@ int main()
 
 	School_year* school = new School_year;
 	int choice1;
+	Semester* se = new Semester;
+	course* c = new course;
 
 	if (type == 1)
 	{
@@ -49,6 +51,11 @@ int main()
 				char* name1;
 				enterTheNameOfClass(name1);
 				readToFile((char*)"Data.csv", school, name1);
+				break;
+			}
+			case 6:
+			{
+				createSemester(se);
 				break;
 			}
 			}

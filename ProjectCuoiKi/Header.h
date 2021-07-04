@@ -6,6 +6,7 @@
 #include <string>
 using namespace std;
 
+//1to5
 struct Student
 {
 	string no;
@@ -86,6 +87,13 @@ struct Semester
 	NODE* pTail;
 };
 
+struct listCourse
+{
+	NODE* pHead;
+	NODE* pTail;
+};
+
+//1to5
 void registerAAcoount();
 bool checkDate(string day, string month, string year);
 void enterTheNameOfClass(char*& name);
@@ -100,5 +108,11 @@ void addStudentToClass(Class*& cl, Student* st);
 void inputClass(School_year*& sy);
 void readToFile(char* file_name, School_year*& sy, char* name);
 void inputStudentToClass(School_year*& school);
+
+//6to11
+NODE* createNodeCourse(course* data);
+void createASemester(Semester*& se);
+void createSemester(Semester*& se);
+void addTail(Semester*& se, course* c);
 
 #endif

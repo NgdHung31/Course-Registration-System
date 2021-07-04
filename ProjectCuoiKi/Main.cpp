@@ -39,9 +39,18 @@ int main()
 				inputClass(school);
 				break;
 			}
-			case 3://****
-				Input_student_to_class(school);
+			case 3:
+			{
+				inputStudentToClass(school);
 				break;
+			}
+			case 4:
+			{
+				char* name1;
+				enterTheNameOfClass(name1);
+				readToFile((char*)"Data.csv", school, name1);
+				break;
+			}
 			}
 		} while (true);
 	}

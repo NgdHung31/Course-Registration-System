@@ -1,5 +1,6 @@
 #include "Header.h"
 
+//CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {
 	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) // nam nhuan
@@ -34,6 +35,25 @@ bool checkDate(string day, string month, string year)
 		}
 		return false;
 	}
+}
+
+bool checkName(char* name1, char* name2)
+{
+	char temp1[20], temp2[20];
+	int i = 0, flag = 1;
+	strcpy(temp1, name1);
+	strcpy(temp2, name2);
+	while (temp1[i] != '\0') {
+		if (temp1[i] != temp2[i]) {
+			flag = 0;
+			break;
+		}
+		i++;
+	}
+	if (flag == 1)
+		return true;
+	else
+		return false;
 }
 
 //1-5
@@ -166,26 +186,85 @@ void addClassToSchoolYear(School_year*& sy, Class* cl)
 	}
 }
 
+void addStudentToClass(Class*& cl, Student* st)
+{
+	Node* node = createNode(st);
+	if (cl->head == NULL)
+	{
+		cl->head = node;
+	}
+	else {
+		Node* temp1 = cl->head;
+		while (temp1->next != NULL)
+		{
+			temp1 = temp1->next;
+		}
+		temp1->next = node;
+	}
+}
+
 void inputClass(School_year*& sy)
 {
 	Class* classes = new Class;
 	createClass(sy, classes);
 	addClassToSchoolYear(sy, classes);
 }
-//*****
-void Input_student_to_class(School_year*& school)
+
+void readToFile(char* file_name, School_year*& sy, char* name)
+{
+	ifstream file(file_name);
+	Student* st = new Student[10];
+	if (!file.is_open())
+	{
+		cout << "Cannot read file!";
+	}
+	else
+	{
+		for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+		{
+			if (checkName(temp->data->class_name, name)) {
+				int i = 0;
+				while (file.good())
+				{
+					getline(file, (st + i)->no, ',');
+
+					getline(file, (st + i)->student_id, ',');
+
+
+					getline(file, (st + i)->first_name, ',');
+					getline(file, (st + i)->last_name, ',');
+
+					getline(file, (st + i)->gender, ',');
+
+					getline(file, (st + i)->day_of_birth, ',');
+					getline(file, (st + i)->month_of_birth, ',');
+					getline(file, (st + i)->year_of_birth, ',');
+
+					getline(file, (st + i)->social_id, '\n');
+
+					addStudentToClass(temp->data, (st + i));
+					i++;
+				}
+				cout << "A large number of students have joined the class\n";
+			}
+		}
+	}
+	file.close();
+}
+
+void inputStudentToClass(School_year*& school)
 {
 	char* name;
-	Enter_the_name(name);
+	enterTheNameOfClass(name);
 	Node_class* temp = school->head;
 	int k = 0;
 	while (temp != NULL)
 	{
-		if (check_name(temp->data->class_name, name))
+		if (checkName(temp->data->class_name, name))
 		{
 			k = 1;
-			Student* st = info_student();
-			Add_student_to_class(temp->data, st);
+			Student* st = infoStudent();
+			addStudentToClass(temp->data, st);
 			cout << "The student has become a part of the class.\n";
 		}
 		temp = temp->next;
@@ -193,5 +272,7 @@ void Input_student_to_class(School_year*& school)
 	if (k == 0)
 		cout << "Students cannot be added to the class. Classroom does not exist! \n";
 }
+
+
 
 // 6-11

@@ -46,18 +46,6 @@ struct School_year
 	Node_class* tail;
 };
 
-bool checkDate(string day, string month, string year);
-void enterTheNameOfClass(char*& name);
-void enterTheNameOfClass(char*& name);
-Student* infoStudent();
-Node* createNode(Student* data);
-Node_class* createNodeClass(Class* data);
-void createSchoolYear(School_year*& sy);
-void createClass(School_year*& school, Class*& classes);
-void addClassToSchoolYear(School_year*& sy, Class* cl);
-void inputClass(School_year*& sy);
-void Input_student_to_class(School_year*& school);//****
-
 //6to11
 struct course
 {
@@ -97,4 +85,19 @@ struct Semester
 	NODE* pHead;
 	NODE* pTail;
 };
+
+bool checkDate(string day, string month, string year);
+void enterTheNameOfClass(char*& name);
+void enterTheNameOfClass(char*& name);
+Student* infoStudent();
+Node* createNode(Student* data);
+Node_class* createNodeClass(Class* data);
+void createSchoolYear(School_year*& sy);
+void createClass(School_year*& school, Class*& classes);
+void addClassToSchoolYear(School_year*& sy, Class* cl);
+void addStudentToClass(Class*& cl, Student* st);
+void inputClass(School_year*& sy);
+void readToFile(char* file_name, School_year*& sy, char* name);
+void inputStudentToClass(School_year*& school);
+
 #endif

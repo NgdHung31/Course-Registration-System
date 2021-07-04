@@ -1,7 +1,4 @@
-﻿#include "Header.h"
-
-
-void register_a_account()
+﻿void registerAAcoount()
 {
 	string username, password;
 
@@ -11,12 +8,12 @@ void register_a_account()
 	cin >> password;
 
 	ofstream f;
-	f.open("D:\\" + username + "txt");
+	f.open("D:\\" + username + ".txt");
 	f << username << endl << password;
 	f.close();
 }
 
-bool check_loggin(string username, string password)
+bool checkLoggin(string username, string password)
 {
 	string ckuser, ckpassword;
 
@@ -31,5 +28,38 @@ bool check_loggin(string username, string password)
 	else
 	{
 		return false;
+	}
+}
+
+void changePassword()
+{
+	string username, password, ckuser, ckpassword, chpassword, chpassword1;
+
+	cout << "Input username: ";
+	cin >> username;
+	cout << "Input the old password: ";
+	cin >> password;
+
+	ifstream f("D:\\" + username + ".txt");
+	getline(f, ckuser);
+	getline(f, ckpassword);
+
+	if ((ckuser == username) && (ckpassword == password))
+	{
+		cout << "Input the password which you want to change: ";
+		cin >> chpassword;
+		cout << endl << "Input the password which you want to change again: ";
+		cin >> chpassword1;
+		if (chpassword == chpassword1)
+		{
+			ofstream f1;
+			f1.open("D:\\" + username + ".txt");
+			f1 << username << endl << chpassword;
+			f1.close();
+		}
+	}
+	else
+	{
+		cout << "Wrong username or password. Please try again!";
 	}
 }

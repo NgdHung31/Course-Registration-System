@@ -87,6 +87,7 @@ struct Semester
 };
 
 void registerAAcoount();
+bool checkLoggin(string username, string password);
 bool checkDate(string day, string month, string year);
 void enterTheNameOfClass(char*& name);
 void enterTheNameOfClass(char*& name);

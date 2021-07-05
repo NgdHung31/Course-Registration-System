@@ -15,6 +15,24 @@ void registerAAcoount()
 	f.close();
 }
 
+bool checkLoggin(string username, string password)
+{
+	string ckuser, ckpassword;
+
+	ifstream f("D:\\" + username + ".txt");
+	getline(f, ckuser);
+	getline(f, ckpassword);
+
+	if ((ckuser == username) && (ckpassword == password))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 //CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {

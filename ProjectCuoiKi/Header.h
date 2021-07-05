@@ -50,23 +50,25 @@ struct School_year
 //6to11
 struct course
 {
-	//start date-end date
-	int startDay0;
-	int startMonth0;
-	//int endYear0;
-	int endDay0;
-	int endMonth0;
-	//session
-	int firstDay;
-	int firstSession;
-	int secondDay;
-	int secondSession;
-	// info course
-	char* courseID;
+	int courseID;
 	char* courseName;
 	char* teacherName;
 	int numberCredits;
 	int maxStudentCourse;
+	char* firstDay;
+	char* firstSession;
+	char* secondDay;
+	char* secondSession;
+};
+//**
+struct session
+{
+	int startYear0;
+	int startDay0;
+	int startMonth0;
+	int endYear0;
+	int endDay0;
+	int endMonth0;
 };
 
 struct NODE

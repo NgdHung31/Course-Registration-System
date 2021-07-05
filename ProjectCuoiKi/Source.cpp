@@ -424,3 +424,39 @@ void addTail(Semester*& se, course* c)
 		temp->pNext = newnode;
 	}
 }
+
+//**
+session* registrationSession()
+{
+	cout << "-------------------------------------------COURSE REGISTRATION DEADLINE:-----------------------------------------------" << endl;
+	session* rs = new session;
+	cout << "Let's create a course registration session." << endl;
+
+	cout << "Enter the start date course registration session: " << endl;
+	do
+	{
+		cout << '\t' << "Day: ";
+		cin >> rs->startDay0;
+		cout << '\t' << "Month: ";
+		cin >> rs->startMonth0;
+		if (checkDate(rs->startDay0, rs->startMonth0, rs->startYear0) == false)
+		{
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (checkDate(rs->startDay0, rs->startMonth0, rs->startYear0) == false);
+
+	cout << "Enter the end date course registration session: " << endl;
+	do
+	{
+		cout << '\t' << "Day: ";
+		cin >> rs->endDay0;
+		cout << '\t' << "Month: ";
+		cin >> rs->endMonth0;
+		if (checkDate(rs->endDay0, rs->endMonth0, rs->endYear0) == false)
+		{
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (checkDate(rs->endDay0, rs->endMonth0, rs->endYear0) == false);
+
+	return rs;
+}

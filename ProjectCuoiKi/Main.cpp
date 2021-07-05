@@ -22,6 +22,7 @@ int main()
 		cout << "3. Add new 1st year students to 1st-year classes\n";
 		cout << "4. He/she want to import a CSV file containing all students in a specific class to the system.\n";
 		cout << "5. He/she want to see list student.\n";
+		cout << "6. Create a semester.\n";
 		cout << "0. Log out.\n";
 
 		do

@@ -288,7 +288,34 @@ void inputStudentToClass(School_year*& school)
 		cout << "Students cannot be added to the class. Classroom does not exist! \n";
 }
 
+void ouputinfostudent(Student* st)//***************
+{
+	cout << "\t\tNO: " << st->no << endl;
+	cout << "\t\tStudent ID: " << st->student_id << endl;
+	cout << "\t\tThe student name: " << st->first_name << " " << st->last_name << endl;
+	cout << "\t\tGender: " << st->gender << endl;
+	cout << "\t\tDate of birth: " << st->day_of_birth << "/" << st->month_of_birth << "/" << st->year_of_birth << endl;
+	cout << "\t\tSocial ID: " << st->social_id;
+}
 
+void outputinfoclass(Class* cl)//****************
+{
+	cout << "\tThe name class: " << cl->class_name;
+	Node* temp = cl->head;
+	int i = 1;
+	while (temp != NULL)
+	{
+		if (temp->next != NULL)
+		{
+			const char* ch = check_order(i);
+			cout << "\n\t" << i << ch << " student" << endl;
+			ouput_info_student(temp->data);
+			temp = temp->next;
+			cout << endl;
+			i++;
+		}
+	}
+}
 
 // 6-11
 NODE* createNodeCourse(course* data)

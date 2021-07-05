@@ -93,9 +93,11 @@ struct listCourse
 	NODE* pTail;
 };
 
-//1to5
+//login
 void registerAAcoount();
 bool checkLoggin(string username, string password);
+
+//1to5
 bool checkDate(string day, string month, string year);
 void enterTheNameOfClass(char*& name);
 void enterTheNameOfClass(char*& name);

@@ -306,6 +306,121 @@ void inputStudentToClass(School_year*& school)
 		cout << "Students cannot be added to the class. Classroom does not exist! \n";
 }
 
+void ouputinfostudent(Student* st)//***************
+{
+	cout << "\t\tNO: " << st->no << endl;
+	cout << "\t\tStudent ID: " << st->student_id << endl;
+	cout << "\t\tThe student name: " << st->first_name << " " << st->last_name << endl;
+	cout << "\t\tGender: " << st->gender << endl;
+	cout << "\t\tDate of birth: " << st->day_of_birth << "/" << st->month_of_birth << "/" << st->year_of_birth << endl;
+	cout << "\t\tSocial ID: " << st->social_id;
+}
 
+void outputinfoclass(Class* cl)//****************
+{
+	cout << "\tThe name class: " << cl->class_name;
+	Node* temp = cl->head;
+	int i = 1;
+	while (temp != NULL)
+	{
+		if (temp->next != NULL)
+		{
+			const char* ch = check_order(i);
+			cout << "\n\t" << i << ch << " student" << endl;
+			ouput_info_student(temp->data);
+			temp = temp->next;
+			cout << endl;
+			i++;
+		}
+	}
+}
 
 // 6-11
+NODE* createNodeCourse(course* data)
+{
+	NODE* p = new NODE;
+	if (p == NULL)
+	{
+		cout << "CANNOT ALLOCATE!";
+		return NULL;
+	}
+	p->data = data;
+	p->pNext = NULL;
+
+	return p;
+}
+
+void createASemester(Semester*& se)
+{
+	se->pHead = se->pTail = NULL;
+}
+
+void createSemester(Semester*& se)
+{
+	cout << "------------------------------------------------CREATE YOUR SEMESTER:---------------------------------------------------" << endl;
+	cout << "Let's create a semester: 1, 2, or 3: ";
+	cin >> se->createASemester;
+
+	if (1 <= se->createASemester && se->createASemester <= 3)
+	{
+		cout << "\nNow, your semester is " << se->createASemester << ".";
+		do
+		{
+			cout << "\nEnter the school year: ";
+			cin >> se->schoolYear;
+			if (se->schoolYear < 2021)
+			{
+				cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+			}
+		} while (se->schoolYear < 2021);
+
+		cout << "Enter the start date semester: " << endl;
+		do
+		{
+			cout << '\t' << "Day: ";
+			cin >> se->startDay;
+			cout << '\t' << "Month: ";
+			cin >> se->startMonth;
+			if (checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false)
+			{
+				cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+			}
+		} while (checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false);
+
+		cout << "Enter the end date semester: " << endl;
+		do
+		{
+			cout << '\t' << "Day: ";
+			cin >> se->endDay;
+			cout << '\t' << "Month: ";
+			cin >> se->endMonth;
+			if (checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false)
+			{
+				cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+			}
+		} while (checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false);
+	}
+	else
+	{
+		cout << "FAULT! PLEASE RE-ENTER: ";
+		cin >> se->createASemester;
+	}
+
+	createASemester(se);
+}
+
+void addTail(Semester*& se, course* c)
+{
+	NODE* newnode = createNodeCourse(c);
+	if (se->pHead == NULL)
+		se->pHead = se->pTail = newnode;
+	else
+	{
+		NODE* temp = se->pHead;
+		while (temp->pNext != NULL)
+		{
+			temp = temp->pNext;
+		}
+		temp->pNext = newnode;
+	}
+}

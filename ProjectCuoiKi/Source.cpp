@@ -316,7 +316,7 @@ void ouputinfostudent(Student* st)//***************
 	cout << "\t\tSocial ID: " << st->social_id;
 }
 
-void outputinfoclass(Class* cl)//****************
+void outputInfoClass(Class* cl)
 {
 	cout << "\tThe name class: " << cl->class_name;
 	Node* temp = cl->head;
@@ -325,9 +325,9 @@ void outputinfoclass(Class* cl)//****************
 	{
 		if (temp->next != NULL)
 		{
-			const char* ch = check_order(i);
+			const char* ch = checkOrder(i);
 			cout << "\n\t" << i << ch << " student" << endl;
-			ouput_info_student(temp->data);
+			ouputInfoStudent(temp->data);
 			temp = temp->next;
 			cout << endl;
 			i++;

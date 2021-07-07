@@ -96,6 +96,7 @@ struct listCourse
 //login
 void registerAAcoount();
 bool checkLoggin(string username, string password);
+void changePassword();
 
 //1to5
 bool checkDate(string day, string month, string year);

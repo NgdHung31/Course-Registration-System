@@ -9,10 +9,11 @@ int main()
 	cin >> type;
 
 	School_year* school = new School_year;
-	int choice1;
 	Semester* se = new Semester;
 	course* c = new course;
 
+	int choice1;
+	int choice2;
 	if (type == 1)
 	{
 		system("cls");

@@ -33,6 +33,39 @@ bool checkLoggin(string username, string password)
 	}
 }
 
+void changePassword()
+{
+	string username, password, ckuser, ckpassword, chpassword, chpassword1;
+
+	cout << "Input username: ";
+	cin >> username;
+	cout << "Input the old password: ";
+	cin >> password;
+
+	ifstream f("D:\\" + username + ".txt");
+	getline(f, ckuser);
+	getline(f, ckpassword);
+
+	if ((ckuser == username) && (ckpassword == password))
+	{
+		cout << "Input the password which you want to change: ";
+		cin >> chpassword;
+		cout << endl << "Input the password which you want to change again: ";
+		cin >> chpassword1;
+		if (chpassword == chpassword1)
+		{
+			ofstream f1;
+			f1.open("D:\\" + username + ".txt");
+			f1 << username << endl << chpassword;
+			f1.close();
+		}
+	}
+	else
+	{
+		cout << "Wrong username or password. Please try again!";
+	}
+}
+
 //CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {

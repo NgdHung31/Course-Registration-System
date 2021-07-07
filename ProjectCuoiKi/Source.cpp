@@ -35,6 +35,7 @@ bool checkLoggin(string username, string password)
 
 void changePassword()
 {
+
 	string username, password, ckuser, ckpassword, chpassword, chpassword1;
 
 	cout << "Input username: ";

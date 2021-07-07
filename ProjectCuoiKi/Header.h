@@ -114,6 +114,7 @@ void readToFile(char* file_name, School_year*& sy, char* name);
 void inputStudentToClass(School_year*& school);
 void ouputinfostudent(Student* st);//************
 
+
 //6to11
 NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);

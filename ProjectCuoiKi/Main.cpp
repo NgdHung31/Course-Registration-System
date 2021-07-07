@@ -12,8 +12,7 @@ int main()
 	Semester* se = new Semester;
 	course* c = new course;
 
-	int choice1;
-	int choice2;
+	int choice1, choice2;
 	if (type == 1)
 	{
 		system("cls");

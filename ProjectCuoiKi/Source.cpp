@@ -370,6 +370,34 @@ void outputInfoClass(Class* cl)
 	}
 }
 
+void printInfo1Class(School_year* sy, char* name)/***********************/
+{
+	int k = 0;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		if (checkName(temp->data->class_name, name) == true)
+		{
+			k = 1;
+			cout << "\t\tThe name class: " << temp->data->class_name << endl;
+			Node* temp1 = temp->data->head;
+			int j = 1;
+			while (temp1 != NULL)
+			{
+				const char* ch = checkOrder(j);
+				cout << "\n\t" << j << ch << " student" << endl;
+				ouputInfoStudent(temp1->data);
+				temp1 = temp1->next;
+				cout << endl;
+				j++;
+			}
+		}
+	}
+	if (k == 0)
+	{
+		cout << "Can not see the list student of class to look for. Classroom does not exist!";
+	}
+}
+
 // 6-11
 NODE* createNodeCourse(course* data)
 {

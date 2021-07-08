@@ -10,12 +10,7 @@ int main()
 
 	School_year* school = new School_year;
 	Semester* se = new Semester;
-	course* c = new course;
-	Student* st = new Student;
-	listStudent ls;
-	listCourse lc;
-	initListCourse(lc);
-	initListStudent(ls);
+	Course* c = new Course;
 
 	int choice1, choice2;
 	if (type == 1)

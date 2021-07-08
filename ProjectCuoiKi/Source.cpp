@@ -495,3 +495,50 @@ session* registrationSession()
 
 	return rs;
 }
+
+
+//12-20
+void initListStudent(listStudent& ls)
+{
+	ls.pHead = NULL;
+	ls.pTail = NULL;
+}
+
+void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+	int n;
+
+	cout << endl << "Enter the number of course you want to enroll (maxium:5): ";
+	do
+	{
+		cin >> n;
+		if (n < 1 || n>5)
+		{
+			cout << "Wrong! Enter again!";
+		}
+	} while (n < 1 || n>5);
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << endl << "--------------------The " << i + 1 << "course --------------------" << endl;
+		cout << "	Enter the ID of course: ";
+		cin >> courseID;
+
+		cout << "	Enter the name of course: ";
+		cin >> courseName;
+
+		for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+		{
+			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+			{
+				cout << "		Enroll successfully!";
+				Node* p = createNodeStudent(st);
+				addTailStudent(ls, p);
+				NODE* q = createNodeCourse(k->data);
+				addTailCourse(lc, q);
+			}
+		}
+	}
+}

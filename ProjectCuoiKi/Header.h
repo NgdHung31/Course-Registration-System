@@ -41,34 +41,31 @@ struct Node_class
 
 struct School_year
 {
-	int the_beginning_year;
-	int the_end_year;
+	int theBeginningYear;
+	int theEndYear;
 	Node_class* head;
 	Node_class* tail;
 };
 
-//6to11
 struct course
 {
-	int courseID;
+	//start date-end date
+	int startDay0;
+	int startMonth0;
+	//int endYear0;
+	int endDay0;
+	int endMonth0;
+	//session
+	int firstDay;
+	int firstSession;
+	int secondDay;
+	int secondSession;
+	// info course
+	char* courseID;
 	char* courseName;
 	char* teacherName;
 	int numberCredits;
 	int maxStudentCourse;
-	char* firstDay;
-	char* firstSession;
-	char* secondDay;
-	char* secondSession;
-};
-//**
-struct session
-{
-	int startYear0;
-	int startDay0;
-	int startMonth0;
-	int endYear0;
-	int endDay0;
-	int endMonth0;
 };
 
 struct NODE
@@ -89,10 +86,23 @@ struct Semester
 	NODE* pTail;
 };
 
+struct listStudent
+{
+	Node* pHead;
+	Node* pTail;
+};
+
 struct listCourse
 {
 	NODE* pHead;
 	NODE* pTail;
+};
+
+struct Scoreboard
+{
+	float finalMarks;
+	float GPA;
+	float overallGPA;
 };
 
 //login
@@ -123,5 +133,10 @@ NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
+
+
+//12to20
+void initListStudent(listStudent& ls);
+void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc);
 
 #endif

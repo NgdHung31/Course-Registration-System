@@ -48,7 +48,7 @@ struct School_year
 };
 
 //6to11
-struct course
+struct Course
 {
 	int courseID;
 	char* courseName;
@@ -61,6 +61,29 @@ struct course
 	char* secondSession;
 };
 //**
+struct NODE
+{
+	Course* data;
+	NODE* pNext;
+};
+//**
+struct LIST
+{
+	NODE* pHead;
+	NODE* pTail;
+};
+//**
+struct Semester
+{
+	int createASemester;
+	int schoolYear;
+	int startDay;
+	int startMonth;
+	int endDay;
+	int endMonth;
+	LIST* listCourses;
+};
+//**
 struct session
 {
 	int startYear0;
@@ -71,29 +94,7 @@ struct session
 	int endMonth0;
 };
 
-struct NODE
-{
-	course* data;
-	NODE* pNext;
-};
 
-struct Semester
-{
-	int createASemester;
-	int schoolYear;
-	int startDay;
-	int startMonth;
-	int endDay;
-	int endMonth;
-	NODE* pHead;
-	NODE* pTail;
-};
-
-struct listCourse
-{
-	NODE* pHead;
-	NODE* pTail;
-};
 
 //login
 void registerAAcoount();
@@ -123,5 +124,7 @@ NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
+session* registrationSession();
+
 
 #endif

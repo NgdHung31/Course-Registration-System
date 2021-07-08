@@ -215,14 +215,14 @@ void createSchoolYear(School_year*& sy)
 	do
 	{
 		cout << "\tThe beginning of the school year: ";
-		cin >> sy->the_beginning_year;
+		cin >> sy->theBeginningYear;
 		cout << "\tThe end of the school year: ";
-		cin >> sy->the_end_year;
-		if (sy->the_beginning_year < 2000 || sy->the_end_year < 2000 || sy->the_beginning_year == sy->the_end_year)
+		cin >> sy->theEndYear;
+		if (sy->theBeginningYear < 2000 || sy->theEndYear < 2000 || sy->theBeginningYear == sy->theEndYear)
 		{
 			cout << "Fault!Please re-enter" << endl;
 		}
-	} while (sy->the_beginning_year < 2000 || sy->the_end_year < 2000 || sy->the_beginning_year == sy->the_end_year);
+	} while (sy->theBeginningYear < 2000 || sy->theEndYear < 2000 || sy->theBeginningYear == sy->theEndYear);
 }
 
 void createClass(School_year*& school, Class*& classes)
@@ -461,39 +461,44 @@ void addTail(Semester*& se, course* c)
 }
 
 //**
-session* registrationSession()
+course* createACourseRegistrationSession(Semester* se, course* c)
 {
-	cout << "-------------------------------------------COURSE REGISTRATION DEADLINE:-----------------------------------------------" << endl;
-	session* rs = new session;
-	cout << "Let's create a course registration session." << endl;
+	cout << "\n-------------------------------------------COURSE REGISTRATION DEADLINE:-----------------------------------------------" << endl;
+	cout << "\t\t\t\t\t\tSEMESTER " << se->createASemester << endl;
+	cout << "\t\t\t\t\t\t" << se->startDay << "/" << se->startMonth << " - " << se->endDay << "/" << se->endMonth << endl;
+	cout << "\nLet's create a course registration session." << endl;
 
 	cout << "Enter the start date course registration session: " << endl;
 	do
 	{
 		cout << '\t' << "Day: ";
-		cin >> rs->startDay0;
+		cin >> c->startDay0;
 		cout << '\t' << "Month: ";
-		cin >> rs->startMonth0;
-		if (checkDate(rs->startDay0, rs->startMonth0, rs->startYear0) == false)
+		cin >> c->startMonth0;
+		if (checkDate(to_string(c->startDay0), to_string(c->startMonth0), to_string(se->schoolYear)) == false)
 		{
 			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
 		}
-	} while (checkDate(rs->startDay0, rs->startMonth0, rs->startYear0) == false);
-
+		else if (checkStartDateInCourse(c->startDay0, c->startMonth0, se->startDay, se->startMonth) == false) {
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (checkDate(to_string(c->startDay0), to_string(c->startMonth0), to_string(se->schoolYear)) == false || checkStartDateInCourse(c->startDay0, c->startMonth0, se->startDay, se->startMonth) == false);
 	cout << "Enter the end date course registration session: " << endl;
 	do
 	{
 		cout << '\t' << "Day: ";
-		cin >> rs->endDay0;
+		cin >> c->endDay0;
 		cout << '\t' << "Month: ";
-		cin >> rs->endMonth0;
-		if (checkDate(rs->endDay0, rs->endMonth0, rs->endYear0) == false)
+		cin >> c->endMonth0;
+		if (checkDate(to_string(c->endDay0), to_string(c->endMonth0), to_string(se->schoolYear)) == false)
 		{
 			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
 		}
-	} while (checkDate(rs->endDay0, rs->endMonth0, rs->endYear0) == false);
-
-	return rs;
+		else if (checkEndDateInCourse(c->endDay0, c->endMonth0, se->endDay, se->endMonth) == false) {
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (checkDate(to_string(c->endDay0), to_string(c->endMonth0), to_string(se->schoolYear)) == false || checkEndDateInCourse(c->endDay0, c->endMonth0, se->endDay, se->endMonth) == false);
+	return c;
 }
 
 

@@ -139,4 +139,5 @@ void addTail(Semester*& se, course* c);
 void initListStudent(listStudent& ls);
 void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc);
 
+
 #endif

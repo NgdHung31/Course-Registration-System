@@ -71,7 +71,7 @@ void changePassword()
 //CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {
-	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) // nam nhuan
+	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) 
 	{
 		if ((stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && (stoi(day) > 0 && stoi(day) < 31))
 		{
@@ -87,7 +87,7 @@ bool checkDate(string day, string month, string year)
 		}
 		return false;
 	}
-	else // khong phai nam nhuan
+	else
 	{
 		if ((stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && (stoi(day) > 0 && stoi(day) < 32))
 		{
@@ -341,7 +341,7 @@ void inputStudentToClass(School_year*& school)
 		cout << "Students cannot be added to the class. Classroom does not exist! \n";
 }
 
-void ouputinfostudent(Student* st)//***************
+void ouputInfoStudent(Student* st)
 {
 	cout << "\t\tNO: " << st->no << endl;
 	cout << "\t\tStudent ID: " << st->student_id << endl;
@@ -370,7 +370,7 @@ void outputInfoClass(Class* cl)
 	}
 }
 
-void printInfo1Class(School_year* sy, char* name)/***********************/
+void printInfo1Class(School_year* sy, char* name)
 {
 	int k = 0;
 	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)

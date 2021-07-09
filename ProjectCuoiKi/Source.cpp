@@ -124,6 +124,26 @@ bool checkName(char* name1, char* name2)
 		return false;
 }
 
+const char* checkOrder(int n)
+{
+	if (n == 1)
+	{
+		return "st";
+	}
+	else if (n == 2)
+	{
+		return "nd";
+	}
+	else if (n == 3)
+	{
+		return "rd";
+	}
+	else
+	{
+		return "th";
+	}
+}
+
 //1-5
 void enterTheName(char*& name)
 {

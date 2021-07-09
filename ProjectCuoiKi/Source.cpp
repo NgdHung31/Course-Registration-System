@@ -71,7 +71,7 @@ void changePassword()
 //CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {
-	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) // nam nhuan
+	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) 
 	{
 		if ((stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && (stoi(day) > 0 && stoi(day) < 31))
 		{
@@ -87,7 +87,7 @@ bool checkDate(string day, string month, string year)
 		}
 		return false;
 	}
-	else // khong phai nam nhuan
+	else
 	{
 		if ((stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && (stoi(day) > 0 && stoi(day) < 32))
 		{
@@ -122,6 +122,26 @@ bool checkName(char* name1, char* name2)
 		return true;
 	else
 		return false;
+}
+
+const char* checkOrder(int n)
+{
+	if (n == 1)
+	{
+		return "st";
+	}
+	else if (n == 2)
+	{
+		return "nd";
+	}
+	else if (n == 3)
+	{
+		return "rd";
+	}
+	else
+	{
+		return "th";
+	}
 }
 
 //1-5
@@ -215,14 +235,14 @@ void createSchoolYear(School_year*& sy)
 	do
 	{
 		cout << "\tThe beginning of the school year: ";
-		cin >> sy->the_beginning_year;
+		cin >> sy->theBeginningYear;
 		cout << "\tThe end of the school year: ";
-		cin >> sy->the_end_year;
-		if (sy->the_beginning_year < 2000 || sy->the_end_year < 2000 || sy->the_beginning_year == sy->the_end_year)
+		cin >> sy->theEndYear;
+		if (sy->theBeginningYear < 2000 || sy->theEndYear < 2000 || sy->theBeginningYear == sy->theEndYear)
 		{
 			cout << "Fault!Please re-enter" << endl;
 		}
-	} while (sy->the_beginning_year < 2000 || sy->the_end_year < 2000 || sy->the_beginning_year == sy->the_end_year);
+	} while (sy->theBeginningYear < 2000 || sy->theEndYear < 2000 || sy->theBeginningYear == sy->theEndYear);
 }
 
 void createClass(School_year*& school, Class*& classes)
@@ -341,7 +361,7 @@ void inputStudentToClass(School_year*& school)
 		cout << "Students cannot be added to the class. Classroom does not exist! \n";
 }
 
-void ouputinfostudent(Student* st)//***************
+void ouputInfoStudent(Student* st)
 {
 	cout << "\t\tNO: " << st->no << endl;
 	cout << "\t\tStudent ID: " << st->student_id << endl;
@@ -370,7 +390,7 @@ void outputInfoClass(Class* cl)
 	}
 }
 
-void printInfo1Class(School_year* sy, char* name)/***********************/
+void printInfo1Class(School_year* sy, char* name)
 {
 	int k = 0;
 	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
@@ -395,6 +415,28 @@ void printInfo1Class(School_year* sy, char* name)/***********************/
 	if (k == 0)
 	{
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
+	}
+}
+/************************/
+void printAllClass(School_year* sy)
+{
+	int i = 1;
+	cout << "--------------------THE INFORMATION CLASS OF THE SCHOOL YEAR--------------------\n";
+	cout << "\tTHE BEGINNING YEAR: " << sy->the_beginning_year << endl;
+	cout << "\tTHE ENDING YEAR: " << sy->the_end_year << endl;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		cout << "-----------------The class " << i << " -------------------\n";
+		cout << "\t\tThe name class: " << temp->data->class_name << endl;
+		Node* temp1 = temp->data->head;
+		int j = 1;
+		while (temp1 != NULL)
+		{
+			ouputInfoStudent(temp1->data);
+			temp1 = temp1->next;
+			j++;
+		}
+		i++;
 	}
 }
 
@@ -489,37 +531,89 @@ void addTail(Semester*& se, Course* c)
 }
 
 //**
-session* registrationSession()
+course* createACourseRegistrationSession(Semester* se, course* c)
 {
-	cout << "-------------------------------------------COURSE REGISTRATION DEADLINE:-----------------------------------------------" << endl;
-	session* rs = new session;
-	cout << "Let's create a course registration session." << endl;
+	cout << "\n-------------------------------------------COURSE REGISTRATION DEADLINE:-----------------------------------------------" << endl;
+	cout << "\t\t\t\t\t\tSEMESTER " << se->createASemester << endl;
+	cout << "\t\t\t\t\t\t" << se->startDay << "/" << se->startMonth << " - " << se->endDay << "/" << se->endMonth << endl;
+	cout << "\nLet's create a course registration session." << endl;
 
 	cout << "Enter the start date course registration session: " << endl;
 	do
 	{
 		cout << '\t' << "Day: ";
-		cin >> rs->startDay0;
+		cin >> c->startDay0;
 		cout << '\t' << "Month: ";
-		cin >> rs->startMonth0;
-		if (checkDate(rs->startDay0, rs->startMonth0, rs->startYear0) == false)
+		cin >> c->startMonth0;
+		if (checkDate(to_string(c->startDay0), to_string(c->startMonth0), to_string(se->schoolYear)) == false)
 		{
 			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
 		}
-	} while (checkDate(rs->startDay0, rs->startMonth0, rs->startYear0) == false);
-
+		else if (checkStartDateInCourse(c->startDay0, c->startMonth0, se->startDay, se->startMonth) == false) {
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (checkDate(to_string(c->startDay0), to_string(c->startMonth0), to_string(se->schoolYear)) == false || checkStartDateInCourse(c->startDay0, c->startMonth0, se->startDay, se->startMonth) == false);
 	cout << "Enter the end date course registration session: " << endl;
 	do
 	{
 		cout << '\t' << "Day: ";
-		cin >> rs->endDay0;
+		cin >> c->endDay0;
 		cout << '\t' << "Month: ";
-		cin >> rs->endMonth0;
-		if (checkDate(rs->endDay0, rs->endMonth0, rs->endYear0) == false)
+		cin >> c->endMonth0;
+		if (checkDate(to_string(c->endDay0), to_string(c->endMonth0), to_string(se->schoolYear)) == false)
 		{
 			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
 		}
-	} while (checkDate(rs->endDay0, rs->endMonth0, rs->endYear0) == false);
+		else if (checkEndDateInCourse(c->endDay0, c->endMonth0, se->endDay, se->endMonth) == false) {
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (checkDate(to_string(c->endDay0), to_string(c->endMonth0), to_string(se->schoolYear)) == false || checkEndDateInCourse(c->endDay0, c->endMonth0, se->endDay, se->endMonth) == false);
+	return c;
+}
 
-	return rs;
+
+//12-20
+void initListStudent(listStudent& ls)
+{
+	ls.pHead = NULL;
+	ls.pTail = NULL;
+}
+
+void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+	int n;
+
+	cout << endl << "Enter the number of course you want to enroll (maxium:5): ";
+	do
+	{
+		cin >> n;
+		if (n < 1 || n>5)
+		{
+			cout << "Wrong! Enter again!";
+		}
+	} while (n < 1 || n>5);
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << endl << "--------------------The " << i + 1 << "course --------------------" << endl;
+		cout << "	Enter the ID of course: ";
+		cin >> courseID;
+
+		cout << "	Enter the name of course: ";
+		cin >> courseName;
+
+		for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+		{
+			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+			{
+				cout << "		Enroll successfully!";
+				Node* p = createNodeStudent(st);
+				addTailStudent(ls, p);
+				NODE* q = createNodeCourse(k->data);
+				addTailCourse(lc, q);
+			}
+		}
+	}
 }

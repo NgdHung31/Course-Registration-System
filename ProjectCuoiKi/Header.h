@@ -41,8 +41,8 @@ struct Node_class
 
 struct School_year
 {
-	int the_beginning_year;
-	int the_end_year;
+	int theBeginningYear;
+	int theEndYear;
 	Node_class* head;
 	Node_class* tail;
 };
@@ -50,7 +50,19 @@ struct School_year
 //6to11
 struct Course
 {
-	int courseID;
+	//start date-end date
+	int startDay0;
+	int startMonth0;
+	//int endYear0;
+	int endDay0;
+	int endMonth0;
+	//session
+	int firstDay;
+	int firstSession;
+	int secondDay;
+	int secondSession;
+	// info course
+	char* courseID;
 	char* courseName;
 	char* teacherName;
 	int numberCredits;
@@ -102,9 +114,12 @@ void registerAAcoount();
 bool checkLoggin(string username, string password);
 void changePassword();
 
+//Check&convert
+bool checkName(char* name1, char* name2);
+bool checkDate(string day, string month, string year);
+const char* checkOrder(int n);
 
 //1to5
-bool checkDate(string day, string month, string year);
 void enterTheNameOfClass(char*& name);
 void enterTheNameOfClass(char*& name);
 Student* infoStudent();
@@ -126,6 +141,12 @@ void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
 session* registrationSession();
+
+
+
+//12to20
+void initListStudent(listStudent& ls);
+void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc);
 
 
 #endif

@@ -399,7 +399,7 @@ void printInfo1Class(School_year* sy, char* name)/***********************/
 }
 
 // 6-11
-NODE* createNodeCourse(course* data)
+NODE* createNodeCourse(Course* data)
 {
 	NODE* p = new NODE;
 	if (p == NULL)
@@ -472,7 +472,7 @@ void createSemester(Semester*& se)
 	createASemester(se);
 }
 
-void addTail(Semester*& se, course* c)
+void addTail(Semester*& se, Course* c)
 {
 	NODE* newnode = createNodeCourse(c);
 	if (se->pHead == NULL)

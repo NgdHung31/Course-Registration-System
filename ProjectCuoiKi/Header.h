@@ -72,7 +72,7 @@ struct LIST
 	NODE* pHead;
 	NODE* pTail;
 };
-//**
+
 struct Semester
 {
 	int createASemester;
@@ -81,7 +81,8 @@ struct Semester
 	int startMonth;
 	int endDay;
 	int endMonth;
-	LIST* listCourses;
+	NODE* pHead;
+	NODE* pTail;
 };
 //**
 struct session

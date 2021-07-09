@@ -417,7 +417,7 @@ void printInfo1Class(School_year* sy, char* name)
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
 	}
 }
-
+/************************/
 void printAllClass(School_year* sy)
 {
 	int i = 1;

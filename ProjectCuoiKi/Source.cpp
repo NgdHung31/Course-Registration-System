@@ -417,13 +417,13 @@ void printInfo1Class(School_year* sy, char* name)
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
 	}
 }
-/************************/
+
 void printAllClass(School_year* sy)
 {
 	int i = 1;
 	cout << "--------------------THE INFORMATION CLASS OF THE SCHOOL YEAR--------------------\n";
 	cout << "\tTHE BEGINNING YEAR: " << sy->the_beginning_year << endl;
-	cout << "\tTHE ENDING YEAR: " << sy->the_end_year << endl;
+	cout << "\tTHE ENDING YEAR: " << sy->the_end_year << endl << endl;
 	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
 	{
 		cout << "-----------------The class " << i << " -------------------\n";
@@ -432,8 +432,11 @@ void printAllClass(School_year* sy)
 		int j = 1;
 		while (temp1 != NULL)
 		{
+			const char* ch = checkOrder(j);
+			cout << "\n\t" << j << ch << " student" << endl;
 			ouputInfoStudent(temp1->data);
 			temp1 = temp1->next;
+			cout << endl;
 			j++;
 		}
 		i++;

@@ -105,25 +105,6 @@ bool checkDate(string day, string month, string year)
 	}
 }
 
-bool checkName(char* name1, char* name2)
-{
-	char temp1[20], temp2[20];
-	int i = 0, flag = 1;
-	strcpy(temp1, name1);
-	strcpy(temp2, name2);
-	while (temp1[i] != '\0') {
-		if (temp1[i] != temp2[i]) {
-			flag = 0;
-			break;
-		}
-		i++;
-	}
-	if (flag == 1)
-		return true;
-	else
-		return false;
-}
-
 //1-5
 void enterTheName(char*& name)
 {
@@ -341,7 +322,7 @@ void inputStudentToClass(School_year*& school)
 		cout << "Students cannot be added to the class. Classroom does not exist! \n";
 }
 
-void ouputinfostudent(Student* st)//***************
+void ouputInfoStudent(Student* st)
 {
 	cout << "\t\tNO: " << st->no << endl;
 	cout << "\t\tStudent ID: " << st->student_id << endl;
@@ -349,53 +330,6 @@ void ouputinfostudent(Student* st)//***************
 	cout << "\t\tGender: " << st->gender << endl;
 	cout << "\t\tDate of birth: " << st->day_of_birth << "/" << st->month_of_birth << "/" << st->year_of_birth << endl;
 	cout << "\t\tSocial ID: " << st->social_id;
-}
-
-void outputInfoClass(Class* cl)
-{
-	cout << "\tThe name class: " << cl->class_name;
-	Node* temp = cl->head;
-	int i = 1;
-	while (temp != NULL)
-	{
-		if (temp->next != NULL)
-		{
-			const char* ch = checkOrder(i);
-			cout << "\n\t" << i << ch << " student" << endl;
-			ouputInfoStudent(temp->data);
-			temp = temp->next;
-			cout << endl;
-			i++;
-		}
-	}
-}
-
-void printInfo1Class(School_year* sy, char* name)/***********************/
-{
-	int k = 0;
-	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
-	{
-		if (checkName(temp->data->class_name, name) == true)
-		{
-			k = 1;
-			cout << "\t\tThe name class: " << temp->data->class_name << endl;
-			Node* temp1 = temp->data->head;
-			int j = 1;
-			while (temp1 != NULL)
-			{
-				const char* ch = checkOrder(j);
-				cout << "\n\t" << j << ch << " student" << endl;
-				ouputInfoStudent(temp1->data);
-				temp1 = temp1->next;
-				cout << endl;
-				j++;
-			}
-		}
-	}
-	if (k == 0)
-	{
-		cout << "Can not see the list student of class to look for. Classroom does not exist!";
-	}
 }
 
 // 6-11
@@ -488,7 +422,6 @@ void addTail(Semester*& se, course* c)
 	}
 }
 
-//**
 course* createACourseRegistrationSession(Semester* se, course* c)
 {
 	cout << "\n-------------------------------------------COURSE REGISTRATION DEADLINE:-----------------------------------------------" << endl;
@@ -574,4 +507,44 @@ void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
 			}
 		}
 	}
+}
+
+void addTailStudent(listStudent& ls, Node* p)
+{
+	if (ls.pHead == NULL)
+	{
+		ls.pHead = ls.pTail = p;
+	}
+	else
+	{
+		ls.pTail->next = p;
+		ls.pTail = p;
+	}
+}
+
+void addTailCourse(listCourse& lc, NODE* k)
+{
+	if (lc.pHead == NULL)
+	{
+		lc.pHead = lc.pTail = k;
+	}
+	else
+	{
+		lc.pTail->pNext = k;
+		lc.pTail = k;
+	}
+}
+
+Node* createNodeStudent(Student* data)
+{
+	Node* p = new Node;
+	if (p == NULL)
+	{
+		cout << "Cannot allocate!";
+		return NULL;
+	}
+	p->data = data;
+	p->next = NULL;
+
+	return p;
 }

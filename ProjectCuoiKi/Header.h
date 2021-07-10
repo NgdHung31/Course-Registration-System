@@ -6,7 +6,6 @@
 #include <string>
 using namespace std;
 
-//1to5
 struct Student
 {
 	string no;
@@ -47,8 +46,7 @@ struct School_year
 	Node_class* tail;
 };
 
-//6to11
-struct Course
+struct course
 {
 	//start date-end date
 	int startDay0;
@@ -67,24 +65,14 @@ struct Course
 	char* teacherName;
 	int numberCredits;
 	int maxStudentCourse;
-	char* firstDay;
-	char* firstSession;
-	char* secondDay;
-	char* secondSession;
 };
-//**
+
 struct NODE
 {
-	Course* data;
+	course* data;
 	NODE* pNext;
 };
-//**
-struct LIST
-{
-	NODE* pHead;
-	NODE* pTail;
-};
-//**
+
 struct Semester
 {
 	int createASemester;
@@ -93,28 +81,34 @@ struct Semester
 	int startMonth;
 	int endDay;
 	int endMonth;
-	LIST* listCourses;
+	NODE* pHead;
+	NODE* pTail;
 };
-//**
-struct session
+
+struct listStudent
 {
-	int startYear0;
-	int startDay0;
-	int startMonth0;
-	int endYear0;
-	int endDay0;
-	int endMonth0;
+	Node* pHead;
+	Node* pTail;
 };
 
+struct listCourse
+{
+	NODE* pHead;
+	NODE* pTail;
+};
 
+struct Scoreboard
+{
+	float finalMarks;
+	float GPA;
+	float overallGPA;
+};
 
-//login
 void registerAAcoount();
 bool checkLoggin(string username, string password);
 void changePassword();
 
-
-//1to5
+//1 - 5
 bool checkDate(string day, string month, string year);
 void enterTheNameOfClass(char*& name);
 void enterTheNameOfClass(char*& name);
@@ -128,21 +122,21 @@ void addStudentToClass(Class*& cl, Student* st);
 void inputClass(School_year*& sy);
 void readToFile(char* file_name, School_year*& sy, char* name);
 void inputStudentToClass(School_year*& school);
-void ouputinfostudent(Student* st);//************
+void ouputInfoStudent(Student* st);
 
-
-//6to11
+// 6 - 11 
 NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
-session* registrationSession();
+course* createACourseRegistrationSession(Semester* se, course* c);
 
-
-
-//12to20
+//12 - 20
 void initListStudent(listStudent& ls);
+void initListCourse(listCourse& lc);
 void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc);
-
+void addTailStudent(listStudent& ls, Node* p);
+void addTailCourse(listCourse& lc, NODE* k);
+Node* createNodeStudent(Student* data);
 
 #endif

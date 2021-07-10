@@ -10,7 +10,7 @@ int main()
 
 	School_year* school = new School_year;
 	Semester* se = new Semester;
-	Course* c = new Course;
+	course* c = new course;
 
 	int choice1, choice2;
 	if (type == 1)
@@ -170,3 +170,4 @@ int main()
 		} while (choice2 != 4);
 	}
 }
+

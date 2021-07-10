@@ -71,7 +71,7 @@ void changePassword()
 //CAC HAM KIEM TRA CHUYEN DOI
 bool checkDate(string day, string month, string year)
 {
-	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) // nam nhuan
+	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0) 
 	{
 		if ((stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && (stoi(day) > 0 && stoi(day) < 31))
 		{
@@ -87,7 +87,7 @@ bool checkDate(string day, string month, string year)
 		}
 		return false;
 	}
-	else // khong phai nam nhuan
+	else
 	{
 		if ((stoi(month) == 1 || stoi(month) == 3 || stoi(month) == 5 || stoi(month) == 7 || stoi(month) == 8 || stoi(month) == 10 || stoi(month) == 12) && (stoi(day) > 0 && stoi(day) < 32))
 		{
@@ -102,6 +102,45 @@ bool checkDate(string day, string month, string year)
 			return true;
 		}
 		return false;
+	}
+}
+
+bool checkName(char* name1, char* name2)
+{
+	char temp1[20], temp2[20];
+	int i = 0, flag = 1;
+	strcpy(temp1, name1);
+	strcpy(temp2, name2);
+	while (temp1[i] != '\0') {
+		if (temp1[i] != temp2[i]) {
+			flag = 0;
+			break;
+		}
+		i++;
+	}
+	if (flag == 1)
+		return true;
+	else
+		return false;
+}
+
+const char* checkOrder(int n)
+{
+	if (n == 1)
+	{
+		return "st";
+	}
+	else if (n == 2)
+	{
+		return "nd";
+	}
+	else if (n == 3)
+	{
+		return "rd";
+	}
+	else
+	{
+		return "th";
 	}
 }
 
@@ -332,8 +371,77 @@ void ouputInfoStudent(Student* st)
 	cout << "\t\tSocial ID: " << st->social_id;
 }
 
+void outputInfoClass(Class* cl)
+{
+	cout << "\tThe name class: " << cl->class_name;
+	Node* temp = cl->head;
+	int i = 1;
+	while (temp != NULL)
+	{
+		if (temp->next != NULL)
+		{
+			const char* ch = checkOrder(i);
+			cout << "\n\t" << i << ch << " student" << endl;
+			ouputInfoStudent(temp->data);
+			temp = temp->next;
+			cout << endl;
+			i++;
+		}
+	}
+}
+
+void printInfo1Class(School_year* sy, char* name)
+{
+	int k = 0;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		if (checkName(temp->data->class_name, name) == true)
+		{
+			k = 1;
+			cout << "\t\tThe name class: " << temp->data->class_name << endl;
+			Node* temp1 = temp->data->head;
+			int j = 1;
+			while (temp1 != NULL)
+			{
+				const char* ch = checkOrder(j);
+				cout << "\n\t" << j << ch << " student" << endl;
+				ouputInfoStudent(temp1->data);
+				temp1 = temp1->next;
+				cout << endl;
+				j++;
+			}
+		}
+	}
+	if (k == 0)
+	{
+		cout << "Can not see the list student of class to look for. Classroom does not exist!";
+	}
+}
+/************************/
+void printAllClass(School_year* sy)
+{
+	int i = 1;
+	cout << "--------------------THE INFORMATION CLASS OF THE SCHOOL YEAR--------------------\n";
+	cout << "\tTHE BEGINNING YEAR: " << sy->the_beginning_year << endl;
+	cout << "\tTHE ENDING YEAR: " << sy->the_end_year << endl;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		cout << "-----------------The class " << i << " -------------------\n";
+		cout << "\t\tThe name class: " << temp->data->class_name << endl;
+		Node* temp1 = temp->data->head;
+		int j = 1;
+		while (temp1 != NULL)
+		{
+			ouputInfoStudent(temp1->data);
+			temp1 = temp1->next;
+			j++;
+		}
+		i++;
+	}
+}
+
 // 6-11
-NODE* createNodeCourse(course* data)
+NODE* createNodeCourse(Course* data)
 {
 	NODE* p = new NODE;
 	if (p == NULL)
@@ -406,7 +514,7 @@ void createSemester(Semester*& se)
 	createASemester(se);
 }
 
-void addTail(Semester*& se, course* c)
+void addTail(Semester*& se, Course* c)
 {
 	NODE* newnode = createNodeCourse(c);
 	if (se->pHead == NULL)

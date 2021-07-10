@@ -72,6 +72,12 @@ struct NODE
 	course* data;
 	NODE* pNext;
 };
+//**
+struct LIST
+{
+	NODE* pHead;
+	NODE* pTail;
+};
 
 struct Semester
 {
@@ -108,8 +114,12 @@ void registerAAcoount();
 bool checkLoggin(string username, string password);
 void changePassword();
 
-//1 - 5
+//Check&convert
+bool checkName(char* name1, char* name2);
 bool checkDate(string day, string month, string year);
+const char* checkOrder(int n);
+
+//1to5
 void enterTheNameOfClass(char*& name);
 void enterTheNameOfClass(char*& name);
 Student* infoStudent();

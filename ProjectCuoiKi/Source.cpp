@@ -578,6 +578,12 @@ void initListStudent(listStudent& ls)
 	ls.pTail = NULL;
 }
 
+void initListCourse(listCourse& lc)
+{
+	lc.pHead = NULL;
+	lc.pTail = NULL;
+}
+
 void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
 {
 	char* courseID = new char;
@@ -655,4 +661,30 @@ Node* createNodeStudent(Student* data)
 	p->next = NULL;
 
 	return p;
+}
+
+void outputListOfEnrolledCourse(listCourse lc)
+{
+	int i = 1;
+	cout << "\t\t The course you have enrolled" << endl;
+	for (NODE* p = lc.pHead; p != NULL; p = p->pNext)
+	{
+		cout << "\t The " << i << " course:" << endl;
+		outputCourse(p->data);
+		cout << endl;
+	}
+}
+
+void deleteHeadCourse(listCourse& lc)
+{
+	if (lc.pHead == NULL)
+	{
+		return;
+	}
+	else
+	{
+		NODE* p = lc.pHead;
+		lc.pHead = lc.pHead->pNext;
+		delete p;
+	}
 }

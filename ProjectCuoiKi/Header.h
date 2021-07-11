@@ -72,7 +72,7 @@ struct NODE
 	course* data;
 	NODE* pNext;
 };
-//**
+
 struct LIST
 {
 	NODE* pHead;
@@ -148,5 +148,7 @@ void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
 void addTailStudent(listStudent& ls, Node* p);
 void addTailCourse(listCourse& lc, NODE* k);
 Node* createNodeStudent(Student* data);
+void outputListOfEnrolledCourse(listCourse lc);
+void deleteHeadCourse(listCourse& lc);
 
 #endif

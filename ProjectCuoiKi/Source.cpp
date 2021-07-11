@@ -144,6 +144,37 @@ const char* checkOrder(int n)
 	}
 }
 
+bool checkStartDateInCourse(int day_course, int month_course, int day_semester, int month_semester)
+{
+	if (month_course < month_semester)
+	{
+		return false;
+	}
+	else if (month_course = month_semester)
+	{
+		if (day_course < day_semester)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool checkEndDateInCourse(int day_course, int month_course, int day_semester, int month_semester)
+{
+	if (month_course > month_semester) {
+		return false;
+	}
+	else if (month_course = month_semester)
+	{
+		if (day_course > day_semester)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 //1-5
 void enterTheName(char*& name)
 {
@@ -467,7 +498,7 @@ bool removeStudent(School_year*& sy)
 }
 
 // 6-11
-NODE* createNodeCourse(Course* data)
+NODE* createNodeCourse(course* data)
 {
 	NODE* p = new NODE;
 	if (p == NULL)
@@ -540,7 +571,7 @@ void createSemester(Semester*& se)
 	createASemester(se);
 }
 
-void addTail(Semester*& se, Course* c)
+void addTail(Semester*& se, course* c)
 {
 	NODE* newnode = createNodeCourse(c);
 	if (se->pHead == NULL)

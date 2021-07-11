@@ -443,6 +443,29 @@ void printAllClass(School_year* sy)
 	}
 }
 
+bool removeStudent(School_year*& sy)
+{
+	char* name;
+	enterTheName(name);
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		if (checkName(temp->data->class_name, name))
+		{
+			Class* cl = temp->data;
+			Node* temp2 = new Node;
+			char* firstname;
+			cout << "The first name_";
+			enterTheName(firstname);
+			char* lastname;
+			cout << "The last name_";
+			enterTheName(lastname);
+			
+			return false;
+		}
+	}
+
+}
+
 // 6-11
 NODE* createNodeCourse(Course* data)
 {

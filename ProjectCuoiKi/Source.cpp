@@ -442,6 +442,19 @@ void printAllClass(School_year* sy)
 		i++;
 	}
 }
+void removeHeadClass(Class*& cl)
+{
+	if (cl->head == NULL)
+	{
+		return;
+	}
+	else
+	{
+		Node* p = cl->head;
+		cl->head = cl->head->next;
+		delete p;
+	}
+}
 
 bool removeStudent(School_year*& sy)
 {
@@ -459,7 +472,16 @@ bool removeStudent(School_year*& sy)
 			char* lastname;
 			cout << "The last name_";
 			enterTheName(lastname);
-			
+			for (Node* temp1 = cl->head; temp1 != NULL; temp1 = temp1->next)
+			{
+				if (temp1->data->first_name.compare(firstname) == 0)
+				{
+					if (temp1->data->last_name.compare(lastname) == 0)
+					{
+						if (temp1 == cl->head)
+						{
+							removeHeadClass(cl);
+							return true;
 			return false;
 		}
 	}

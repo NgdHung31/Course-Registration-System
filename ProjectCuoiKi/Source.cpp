@@ -487,6 +487,31 @@ void removeHeadClass(Class*& cl)
 	}
 }
 
+void removeTailClass(Class*& cl)
+{
+	if (cl->head == NULL)
+	{
+		return;
+	}
+	if (cl->head->next == NULL)
+	{
+		removeHeadClass(cl);
+	}
+	else
+	{
+		for (Node* k = cl->head; k != NULL; k = k->next)
+		{
+			if (k->next == cl->tail)
+			{
+				delete cl->tail;
+				k->next = NULL;
+				cl->tail = k;
+			}
+		}
+	}
+
+}
+
 bool removeStudent(School_year*& sy)
 {
 	char* name;
@@ -513,6 +538,12 @@ bool removeStudent(School_year*& sy)
 						{
 							removeHeadClass(cl);
 							return true;
+						}
+						else if (temp1 == cl->tail)
+						{
+							removeTailClass(cl);
+							return true;
+						}
 			return false;
 		}
 	}

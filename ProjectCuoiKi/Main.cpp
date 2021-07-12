@@ -64,6 +64,13 @@ int main()
 				readToFile((char*)"Data.csv", school, name1);
 				break;
 			}
+			case 5:
+			{
+				char* name2;
+				enterTheNameOfClass(name2);
+				printInfo1Class(school, name2);
+				break;
+			}
 			case 6:
 			{
 				createSemester(se);

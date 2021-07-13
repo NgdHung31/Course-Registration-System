@@ -691,3 +691,58 @@ void deleteHeadCourse(listCourse& lc)
 		delete p;
 	}
 }
+
+void deleteTailCourse(listCourse& lc)
+{
+	if (lc.pHead == NULL)
+	{
+		return;
+	}
+	if (lc.pHead->pNext == NULL)
+	{
+		deleteHeadCourse(lc);
+	}
+	for (NODE* k = lc.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->pNext == lc.pHead)
+		{
+			delete lc.pTail;
+			k->pNext = NULL;
+			lc.pTail = k;
+		}
+	}
+}
+
+void removeACourseFromEnrolledList(listCourse& lc)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	cout << "	Enter the ID of course you want to remove: ";
+	cin >> courseID;
+	cout << "	Enter the name of course you want to remove: ";
+	cin >> courseName;
+
+	if (checkName(courseName, lc.pHead->data->courseName) == true && checkName(courseID, lc.pHead->data->courseID) == true)
+	{
+		deleteHeadCourse(lc);
+	}
+	else if (checkName(courseName, lc.pTail->data->courseName) == true && checkName(courseID, lc.pTail->data->courseID) == true)
+	{
+		deleteTailCourse(lc);
+	}
+	else
+	{
+		NODE* g = new NODE;
+		for (NODE* k = lc.pHead; k != NULL; k = k->pNext)
+		{
+			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+			{
+				g->pNext = k->pNext;
+				delete k;
+				k = g;
+			}
+			g = k;
+		}
+	}
+}

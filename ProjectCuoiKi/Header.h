@@ -150,5 +150,8 @@ void addTailCourse(listCourse& lc, NODE* k);
 Node* createNodeStudent(Student* data);
 void outputListOfEnrolledCourse(listCourse lc);
 void deleteHeadCourse(listCourse& lc);
+void deleteTailCourse(listCourse& lc);
+void removeACourseFromEnrolledList(listCourse& lc);
+
 
 #endif

@@ -17,6 +17,7 @@ struct Student
 	string month_of_birth;
 	string year_of_birth;
 	string social_id;
+	string the_course_was_register;
 };
 
 struct Node

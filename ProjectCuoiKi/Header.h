@@ -139,7 +139,8 @@ NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
-course* createACourseRegistrationSession(Semester* se, course* c);
+course* createACourseRegistrationSession(Semester* se, course* c); //*****
+
 
 //12 - 20
 void initListStudent(listStudent& ls);

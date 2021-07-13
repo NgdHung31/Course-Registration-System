@@ -29,6 +29,10 @@ int main()
 		cout << "5. He/she want to see list student.\n";
 		cout << "6. Create a semester.\n";
 		cout << "7. Create a course registration session.\n";
+		cout << "8. Add a course to this semester.\n";
+		cout << "9. View list of courses.\n";
+		cout << "10. Update course information.\n";
+		cout << "11. Delete a course.\n";
 		cout << "0. Log out.\n";
 
 		do
@@ -60,6 +64,13 @@ int main()
 				readToFile((char*)"Data.csv", school, name1);
 				break;
 			}
+			case 5:
+			{
+				char* name2;
+				enterTheNameOfClass(name2);
+				printInfo1Class(school, name2);
+				break;
+			}
 			case 6:
 			{
 				createSemester(se);
@@ -67,11 +78,37 @@ int main()
 			}
 			case 7:
 			{
-				registrationSession();
+				//Trong phien dang ki nay se bao gom cac khoa trong cau 8 ma minh se nhap vao, tuc la trong mot hoc ky thi thuong chi co 1 phien dang ki, neu muon tao phien dang ki khac thi nhap lai lenh nay
+				c = createACourseRegistrationSession(se, c);
+				break;
+			}
+			case 8:
+			{
+				//********
+				addTail(se, c);
+				break;
+			}
+			case 9:
+			{
+
+				break;
+			}
+			case 10:
+			{
+
+				break;
+			}
+			case 11:
+			{
+
+				break;
+			}
+			case 0:
+			{
 				break;
 			}
 			}
-		} while (true);
+		} while (choice1 != 0);
 	}
 
 	if (type == 2)

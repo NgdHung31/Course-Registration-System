@@ -144,6 +144,37 @@ const char* checkOrder(int n)
 	}
 }
 
+bool checkStartDateInCourse(int day_course, int month_course, int day_semester, int month_semester)
+{
+	if (month_course < month_semester)
+	{
+		return false;
+	}
+	else if (month_course = month_semester)
+	{
+		if (day_course < day_semester)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool checkEndDateInCourse(int day_course, int month_course, int day_semester, int month_semester)
+{
+	if (month_course > month_semester) {
+		return false;
+	}
+	else if (month_course = month_semester)
+	{
+		if (day_course > day_semester)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 //1-5
 void enterTheName(char*& name)
 {
@@ -442,9 +473,85 @@ void printAllClass(School_year* sy)
 		i++;
 	}
 }
+void removeHeadClass(Class*& cl)
+{
+	if (cl->head == NULL)
+	{
+		return;
+	}
+	else
+	{
+		Node* p = cl->head;
+		cl->head = cl->head->next;
+		delete p;
+	}
+}
+
+void removeTailClass(Class*& cl)
+{
+	if (cl->head == NULL)
+	{
+		return;
+	}
+	if (cl->head->next == NULL)
+	{
+		removeHeadClass(cl);
+	}
+	else
+	{
+		for (Node* k = cl->head; k != NULL; k = k->next)
+		{
+			if (k->next == cl->tail)
+			{
+				delete cl->tail;
+				k->next = NULL;
+				cl->tail = k;
+			}
+		}
+	}
+
+}
+
+bool removeStudent(School_year*& sy)
+{
+	char* name;
+	enterTheName(name);
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		if (checkName(temp->data->class_name, name))
+		{
+			Class* cl = temp->data;
+			Node* temp2 = new Node;
+			char* firstname;
+			cout << "The first name_";
+			enterTheName(firstname);
+			char* lastname;
+			cout << "The last name_";
+			enterTheName(lastname);
+			for (Node* temp1 = cl->head; temp1 != NULL; temp1 = temp1->next)
+			{
+				if (temp1->data->first_name.compare(firstname) == 0)
+				{
+					if (temp1->data->last_name.compare(lastname) == 0)
+					{
+						if (temp1 == cl->head)
+						{
+							removeHeadClass(cl);
+							return true;
+						}
+						else if (temp1 == cl->tail)
+						{
+							removeTailClass(cl);
+							return true;
+						}
+			return false;
+		}
+	}
+
+}
 
 // 6-11
-NODE* createNodeCourse(Course* data)
+NODE* createNodeCourse(course* data)
 {
 	NODE* p = new NODE;
 	if (p == NULL)
@@ -517,7 +624,7 @@ void createSemester(Semester*& se)
 	createASemester(se);
 }
 
-void addTail(Semester*& se, Course* c)
+void addTail(Semester*& se, course* c)
 {
 	NODE* newnode = createNodeCourse(c);
 	if (se->pHead == NULL)

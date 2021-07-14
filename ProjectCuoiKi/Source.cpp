@@ -544,6 +544,17 @@ bool removeStudent(School_year*& sy)
 							removeTailClass(cl);
 							return true;
 						}
+						else
+						{
+							temp2->next = temp1->next;
+							delete temp1;
+							temp1 = temp2;
+							return true;
+						}
+					}
+				}
+					temp2 = temp1;
+			}
 			return false;
 		}
 	}

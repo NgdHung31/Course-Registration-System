@@ -71,6 +71,11 @@ int main()
 				printInfo1Class(school, name2);
 				break;
 			}
+			case 51:
+			{
+				printAllClass(school);
+				break;
+			}
 			case 6:
 			{
 				createSemester(se);

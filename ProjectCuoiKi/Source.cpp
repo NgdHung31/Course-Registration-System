@@ -690,7 +690,94 @@ course* createACourseRegistrationSession(Semester* se, course* c)
 	} while (checkDate(to_string(c->endDay0), to_string(c->endMonth0), to_string(se->schoolYear)) == false || checkEndDateInCourse(c->endDay0, c->endMonth0, se->endDay, se->endMonth) == false);
 	return c;
 }
+ 
+void addACourseToThisSemester(Semester*& se, course* c)
+{
+	cout << "------------------------------------------------CREATE YOUR COURSE:----------------------------------------------------" << endl;
 
+	cout << "Enter the ID of course: ";
+	cin.ignore();
+	char temp[100];
+	cin.getline(temp, 100);
+	c->courseID = new char[strlen(temp) + 1];
+	strcpy(c->courseID, temp);
+
+	char temp1[100];
+	cout << "Enter the name of course: ";
+	cin.getline(temp1, 100);
+	c->courseName = new char[strlen(temp1) + 1];
+	strcpy(c->courseName, temp1);
+
+	cout << "Enter the name of teacher: ";
+	char temp2[100];
+	cin.getline(temp2, 100, '\n');
+	c->teacherName = new char[strlen(temp2) + 1];
+	strcpy(c->teacherName, temp2);
+
+	cout << "Enter the number of credits: ";
+	cin >> c->numberCredits;
+
+	do
+	{
+		cout << "Enter the maximum number of students in the course (default 50): ";
+		cin >> c->maxStudentCourse;
+		if (c->maxStudentCourse > 50)
+		{
+			cout << "FAULT! PLEASE RE-ENTER" << endl;
+		}
+	} while (c->maxStudentCourse > 50);
+
+	cout << "THE SESSION THAT THE COURSE WILL BE PERFORMED:" << endl;
+	cout << "\tDAY OF WEEK:       \t" << "THE TIME SESSION:\n";
+	cout << "\tchoose 2: MONDAY   \t" << "S1: 07:30\n";
+	cout << "\tchoose 3: TUESDAY  \t" << "S2: 09:30\n";
+	cout << "\tchoose 4: WEDNESDAY\t" << "S3: 13:30\n";
+	cout << "\tchoose 5: THURSDAY \t" << "S4: 15:30\n";
+	cout << "\tchoose 6: FRIDAY   \n";
+	cout << "\tchoose 7: SATURDAY \n";
+	do
+	{
+		cout << "The first day: ";
+		cin >> c->firstDay;
+		if (c->firstDay < 2 || c->firstDay > 7)
+		{
+			cout << "FAULT! PLEASE RE-ENTER" << endl;
+		}
+	} while (c->firstDay < 2 || c->firstDay > 7);
+
+	do
+	{
+		cout << "The session: S";
+		cin >> c->firstSession;
+		if (c->firstSession < 1 || c->firstSession > 4)
+		{
+			cout << "FAULT! PLEASE RE-ENTER" << endl;
+		}
+	} while (c->firstSession < 1 || c->firstSession > 4);
+
+
+	do
+	{
+		cout << "The second day: ";
+		cin >> c->secondDay;
+		if (c->secondDay < 2 || c->secondDay > 7)
+		{
+			cout << "FAULT! PLEASE RE-ENTER" << endl;
+		}
+	} while (c->secondDay < 2 || c->secondDay > 7);
+
+	do
+	{
+		cout << "The session: S";
+		cin >> c->secondSession;
+		if (c->secondSession < 1 || c->secondSession > 4)
+		{
+			cout << "FAULT! PLEASE RE-ENTER" << endl;
+		}
+	} while (c->secondSession < 1 || c->secondSession > 4);
+
+	addTail(se, c);
+}
 
 //12-20
 void initListStudent(listStudent& ls)

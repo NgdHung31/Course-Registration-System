@@ -121,6 +121,8 @@ bool checkDate(string day, string month, string year);
 const char* checkOrder(int n);
 bool checkStartDateInCourse(int day_course, int month_course, int day_semester, int month_semester);
 bool checkEndDateInCourse(int day_course, int month_course, int day_semester, int month_semester);
+const char* convertDay(int day);
+const char* convertSession(int session);
 
 //1to5
 void enterTheNameOfClass(char*& name);
@@ -143,7 +145,9 @@ void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
 course* createACourseRegistrationSession(Semester* se, course* c);
-void addACourseToThisSemester(Semester*& se, course* c);//****
+void addACourseToThisSemester(Semester*& se, course* c);
+void outputCourse(course* c);
+
 
 //12 - 20
 void initListStudent(listStudent& ls);

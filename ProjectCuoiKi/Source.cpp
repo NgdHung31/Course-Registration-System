@@ -175,6 +175,50 @@ bool checkEndDateInCourse(int day_course, int month_course, int day_semester, in
 	return true;
 }
 
+const char* convertDay(int day)
+{
+	switch (day)
+	{
+	case 2:
+		return "MONDAY";
+		break;
+	case 3:
+		return "TUESDAY";
+		break;
+	case 4:
+		return "WEDNESDAY";
+		break;
+	case 5:
+		return "THURSDAY";
+		break;
+	case 6:
+		return "FRIDAY";
+		break;
+	case 7:
+		return "SATURDAY";
+		break;
+	}
+}
+
+const char* convertSession(int session)
+{
+	switch (session)
+	{
+	case 1:
+		return "07:30";
+		break;
+	case 2:
+		return "09:30";
+		break;
+	case 3:
+		return "13:30";
+		break;
+	case 4:
+		return "15:30";
+		break;
+	}
+}
+
 //1-5
 void enterTheName(char*& name)
 {

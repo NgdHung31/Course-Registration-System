@@ -853,3 +853,40 @@ void removeACourseFromEnrolledList(listCourse& lc)
 		}
 	}
 }
+
+void outputListOfYourCourse(listCourse lc)
+{
+	int i = 1;
+	cout << "\t\t The course you have to study in this semester" << endl;
+	for (NODE* p = lc.pHead; p != NULL; p = p->pNext)
+	{
+		cout << "\t The " << i << " course:" << endl;
+		outputCourse(p->data);
+		cout << endl;
+	}
+}
+
+void outputListOfClasses(School_year* sy)
+{
+	int i = 1;
+	cout << "---------------THE INFORMATION CLASS OF THE SCHOOL YEAR---------------\n";
+	cout << "\tTHE BEGINNING YEAR: " << sy->theBeginningYear << endl;
+	cout << "\tTHE ENDING YEAR: " << sy->theEndYear << endl << endl;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		cout << "-----------------The class " << i << " -------------------\n";
+		cout << "\t\tThe name class: " << temp->data->class_name << endl;
+		Node* temp1 = temp->data->head;
+		int j = 1;
+		while (temp1 != NULL)
+		{
+			const char* ch = checkOrder(j);
+			cout << "\n\t" << j << ch << " student" << endl;
+			ouputInfoStudent(temp1->data);
+			temp1 = temp1->next;
+			cout << endl;
+			j++;
+		}
+		i++;
+	}
+}

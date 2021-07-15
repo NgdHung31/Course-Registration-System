@@ -153,6 +153,7 @@ void outputListOfEnrolledCourse(listCourse lc);
 void deleteHeadCourse(listCourse& lc);
 void deleteTailCourse(listCourse& lc);
 void removeACourseFromEnrolledList(listCourse& lc);
-
+void outputListOfYourCourse(listCourse lc);
+void outputListOfClasses(School_year* sy);
 
 #endif

@@ -71,6 +71,11 @@ int main()
 				printInfo1Class(school, name2);
 				break;
 			}
+			case 51:
+			{
+				printAllClass(school);
+				break;
+			}
 			case 6:
 			{
 				createSemester(se);
@@ -84,8 +89,8 @@ int main()
 			}
 			case 8:
 			{
-				//********
-				addTail(se, c);
+				//Co the them nhieu khoa hoc trong mot phien dang ky, neu muon them khoa hoc o phien dang ki khac thi qua lay cau 7 de tao mot phien dang ky moi
+				addACourseToThisSemester(se, c);
 				break;
 			}
 			case 9:

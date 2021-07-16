@@ -138,6 +138,12 @@ void inputClass(School_year*& sy);
 void readToFile(char* file_name, School_year*& sy, char* name);
 void inputStudentToClass(School_year*& school);
 void ouputInfoStudent(Student* st);
+void removeHeadSchoolYear(School_year*& sy);
+void removeTailSchoolYear(School_year*& sy);
+bool removeClass(School_year*& sy);
+void removeHeadClass(Class*& cl);
+void removeTailClass(Class*& cl);
+bool removeStudent(School_year*& sy);
 
 // 6 - 11 
 NODE* createNodeCourse(course* data);

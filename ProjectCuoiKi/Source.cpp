@@ -517,6 +517,39 @@ void printAllClass(School_year* sy)
 		i++;
 	}
 }
+
+bool removeClass(School_year*& sy)
+{
+	char* name;
+	enterTheName(name);
+	Node_class* temp1 = new Node_class;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+	{
+		if (checkName(temp->data->class_name, name))
+		{
+			if (temp == sy->head)
+			{
+				removeHeadSchoolYear(sy);
+				return true;
+			}
+			else if (temp == sy->tail)
+			{
+				removeTailSchoolYear(sy);
+				return true;
+			}
+			else
+			{
+				temp1->next = temp->next;
+				delete temp;
+				temp = temp1;
+				return true;
+			}
+		}
+		temp1 = temp;
+	}
+	return false;
+}
+
 void removeHeadClass(Class*& cl)
 {
 	if (cl->head == NULL)

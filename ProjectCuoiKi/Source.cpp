@@ -856,6 +856,20 @@ void addACourseToThisSemester(Semester*& se, course* c)
 	addTail(se, c);
 }
 
+void outputCourse(course* c)
+{
+	cout << "\tThe ID of course: " << c->courseID << endl;
+	cout << "\tThe name of course: " << c->courseName << endl;
+	cout << "\tThe name of teacher: " << c->teacherName << endl;
+	cout << "\tThe number of credits: " << c->numberCredits << endl;
+	cout << "\tThe maximum number of students in the course (default 50): " << c->maxStudentCourse << endl;
+	cout << "\ta course registration session: " << c->startDay0 << "/" << c->startMonth0 << " - " << c->endDay0 << "/" << c->endMonth0 << endl;
+	cout << "\t\tThe FRIST day: " << convertDay(c->firstDay) << endl;
+	cout << "\t\tThe FRIST session: " << convertSession(c->firstSession) << endl;
+	cout << "\t\tThe SECOND day: " << convertDay(c->secondDay) << endl;
+	cout << "\t\tThe SECOND session: " << convertSession(c->secondSession) << endl;
+}
+
 //12-20
 void initListStudent(listStudent& ls)
 {

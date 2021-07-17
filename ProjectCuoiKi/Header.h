@@ -162,5 +162,6 @@ void deleteTailCourse(listCourse& lc);
 void removeACourseFromEnrolledList(listCourse& lc);
 void outputListOfYourCourse(listCourse lc);
 void outputListOfClasses(School_year* sy);
+void outputListOfStudentInAClass(School_year* sy, char* name);
 
 #endif

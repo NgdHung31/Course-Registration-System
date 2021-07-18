@@ -1,4 +1,4 @@
-#include "Header.h"
+﻿#include "Header.h"
 
 void registerAAcoount()
 {
@@ -1131,4 +1131,25 @@ void outputListOfStudentInAClass(School_year* sy, char* name)
 	{
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
 	}
+}
+
+//Xuất danh sách sinh viên trong 1 khóa học sang tệp CSV
+void outputListOfStudentsInACourseToCSVfile(listStudent ls)
+{
+	int i = -1;
+	ofstream ofile("ListStudentInACourse.csv");
+	for (Node* k = ls.pHead; k != NULL; k = k->next)
+	{
+		ofile << i++ << ",";
+		ofile << k->data->student_id << ",";
+		ofile << k->data->first_name << ",";
+		ofile << k->data->last_name << ",";
+		ofile << k->data->gender << ",";
+		ofile << k->data->day_of_birth << ",";
+		ofile << k->data->month_of_birth << ",";
+		ofile << k->data->year_of_birth << ",";
+		ofile << k->data->social_id << "\n";
+	}
+	cout << "Done !\n";
+	ofile.close();
 }

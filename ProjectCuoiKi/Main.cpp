@@ -33,6 +33,7 @@ int main()
 		cout << "9. View list of courses.\n";
 		cout << "10. Update course information.\n";
 		cout << "11. Delete a course.\n";
+		cout << "21. Export list of students in a course to a CSV file.\n";
 		cout << "0. Log out.\n";
 
 		do
@@ -113,6 +114,11 @@ int main()
 
 				break;
 			}
+			case 21:
+			{
+				outputListOfStudentsInACourseToCSVfile(ls);
+				break;
+			}
 			case 0:
 			{
 				break;
@@ -136,7 +142,7 @@ int main()
 		cout << "17. View list of classes.\n";
 		cout << "18. View list of students in a class (for example, 20APCS1...)\n";
 		cout << "19. View list of courses.\n";
-		cout << "20. View list of students in a course.";
+		cout << "20. View list of students in a course.\n";
 
 		do
 		{

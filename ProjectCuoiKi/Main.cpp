@@ -100,7 +100,7 @@ int main()
 			}
 			case 9:
 			{
-
+				printList(se);
 				break;
 			}
 			case 10:

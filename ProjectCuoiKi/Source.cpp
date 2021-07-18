@@ -870,6 +870,31 @@ void outputCourse(course* c)
 	cout << "\t\tThe SECOND session: " << convertSession(c->secondSession) << endl;
 }
 
+void printList(Semester*& se)
+{
+	cout << "\n\t********************VIEW LIST OF COURSE************************" << endl;
+	cout << "\t\t\t\tSEMESTER " << se->createASemester << endl;
+	cout << "\t\t\t\t" << se->startDay << "/" << se->startMonth << " - " << se->endDay << "/" << se->endMonth << endl;
+
+	NODE* temp = se->pHead;
+	int i = 1;
+	if (temp != NULL)
+	{
+		for (temp = se->pHead; temp != NULL; temp = temp->pNext)
+		{
+			const char* ch = checkOrder(i);
+			cout << "\n\t" << i << ch << " course " << endl;
+			outputCourse(temp->data);
+			cout << endl;
+			i++;
+		}
+	}
+	else
+	{
+		cout << "Empty list!\n";
+	}
+}
+
 //12-20
 void initListStudent(listStudent& ls)
 {

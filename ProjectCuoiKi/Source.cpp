@@ -219,7 +219,7 @@ const char* convertSession(int session)
 	}
 }
 
-//1-5
+// 1 - 5
 void enterTheName(char*& name)
 {
 	cin.ignore();
@@ -516,6 +516,36 @@ void printAllClass(School_year* sy)
 		}
 		i++;
 	}
+}
+
+void removeHeadSchoolYear(School_year*& sy)
+{
+	if (sy->head == NULL)
+	{
+		return;
+	}
+	else
+	{
+		Node_class* p = sy->head;
+		sy->head = sy->head->next;
+		delete p;
+	}
+}
+
+void removeTailSchoolYear(School_year*& sy)
+{
+	if (sy->head == NULL)
+	{
+		return;
+	}
+	if (sy->head->next == NULL)
+	{
+		removeHeadSchoolYear(sy);
+	}
+	else
+	{
+	}
+
 }
 
 bool removeClass(School_year*& sy)
@@ -1133,6 +1163,7 @@ void outputListOfStudentInAClass(School_year* sy, char* name)
 	}
 }
 
+// 21 - 25
 //Xuất danh sách sinh viên trong 1 khóa học sang tệp CSV
 void outputListOfStudentsInACourseToCSVfile(listStudent ls)
 {

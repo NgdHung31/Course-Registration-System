@@ -895,6 +895,22 @@ void printList(Semester*& se)
 	}
 }
 
+//**
+void addNode_p_AfterNode_q(course* c, Semester* se)
+{
+	c = new course;
+	addACourseToThisSemester(se,c);
+	for (NODE* k = l->pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data->courseID == x)
+		{
+			NODE* g = p;
+			g->pNext = k->pNext;
+			k->pNext = g;
+		}
+	}
+}
+
 //12-20
 void initListStudent(listStudent& ls)
 {

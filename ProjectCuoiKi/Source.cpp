@@ -1093,3 +1093,39 @@ void outputListOfStudentInAClass(School_year* sy, char* name)
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
 	}
 }
+
+void outputListOfCourses(Semester* se)
+{
+	cout << "\n\t---------- LIST OF COURSE ----------" << endl;
+
+	NODE* temp = se->pHead;
+	int i = 1;
+	if (temp != NULL)
+	{
+		for (temp = se->pHead; temp != NULL; temp = temp->pNext)
+		{
+			const char* ch = checkOrder(i);
+			cout << "\n\t" << i << ch << " course " << endl;
+			outputCourse(temp->data);
+			cout << endl;
+			i++;
+		}
+	}
+	else
+	{
+		cout << "Empty list!\n";
+	}
+}
+
+void outputListOfStudentsInACourse(listStudent ls)
+{
+	int i = 1;
+	cout << "\t\t List of students in this course" << endl;
+	for (Node* k = ls.pHead; k != NULL; k = k->next)
+	{
+		cout << endl << "Student number " << i << " :";
+		ouputInfoStudent(k->data);
+		cout << endl;
+		i++;
+	}
+}

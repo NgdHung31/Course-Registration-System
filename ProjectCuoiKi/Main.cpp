@@ -82,6 +82,11 @@ int main()
 				removeClass(school);
 				break;
 			}
+			case 53:
+			{
+				removeStudent(school);
+				break;
+			}
 			case 6:
 			{
 				createSemester(se);

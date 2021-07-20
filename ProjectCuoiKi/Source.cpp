@@ -544,6 +544,15 @@ void removeTailSchoolYear(School_year*& sy)
 	}
 	else
 	{
+		for (Node_class* k = sy->head; k != NULL; k = k->next)
+		{
+			if (k->next == sy->tail)
+			{
+				delete sy->tail;
+				k->next = NULL;
+				sy->tail = k;
+			}
+		}
 	}
 
 }
@@ -926,17 +935,50 @@ void printList(Semester*& se)
 }
 
 //**
-void addNode_p_AfterNode_q(course* c, Semester* se)
+void updateInformation(Semester*& se)
 {
-	c = new course;
-	addACourseToThisSemester(se,c);
-	for (NODE* k = l->pHead; k != NULL; k = k->pNext)
+	char* ID;
+	int choice;
+	cout << "--------------------------------------------------UPDATE YOUR COURSE INFORMATION:---------------------------------------------------";
+
+	cout << "\nEnter the ID of course needed to update: ";
+	cin.ignore();
+	char temp[100];
+	cin.getline(temp, 100);
+	ID = new char[strlen(temp) + 1];
+	strcpy(ID, temp);
+
+	for (NODE* temp1 = se->pHead; temp1 != NULL; temp1 = temp1->pNext)
 	{
-		if (k->data->courseID == x)
+		if (checkName(ID, temp1->data->courseID))
 		{
-			NODE* g = p;
-			g->pNext = k->pNext;
-			k->pNext = g;
+			cout << "--------------------------------------------------What would you like to have updated in the course?--------------------------------------------------\n";
+			cout << "\tChoice 1: Update ID.\n";
+			cout << "\tChoice 2: Update the name of the course.\n";
+			cout << "\tChoice 3: Update the name of the teacher.\n";
+			cout << "\tChoice 4: Update The number of credits.\n";
+			cout << "\tChoice 5: The maximum number of students in the course.\n";
+			cout << "\tChoice 6: Update the day of week.\n";
+			cout << "\tChoice 7: Update the time session.\n";
+
+			cout << "\nEnter yours choice: ";
+			cin >> choice;
+			switch (choice)
+			{
+			case 1:
+			{
+				char* ID;
+				cout << "\tEnter The new ID: ";
+				cin.ignore();
+				char temp2[100];
+				cin.getline(temp2, 100);
+				ID = new char[strlen(temp2) + 1];
+				strcpy(ID, temp2);
+
+				swap(ID, temp1->data->courseID);
+				break;
+			}
+			}
 		}
 	}
 }

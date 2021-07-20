@@ -47,81 +47,81 @@ int main()
 				cout << "\nYour choice: ";
 				cin >> choice1;
 
-				switch (choice1)
-				{
-				case 1:
-				{
-					createSchoolYear(school);
-					break;
-				}
-				case 2:
-				{
-					inputClass(school);
-					break;
-				}
-				case 3:
-				{
-					inputStudentToClass(school);
-					break;
-				}
-				case 4:
-				{
-					char* name1;
-					enterTheNameOfClass(name1);
-					readToFile((char*)"Data.csv", school, name1);
-					break;
-				}
-				case 5:
-				{
-					char* name2;
-					enterTheNameOfClass(name2);
-					printInfo1Class(school, name2);
-					break;
-				}
-				case 51:
-				{
-					printAllClass(school);
-					break;
-				}
-				case 52:
-				{
-					removeClass(school);
-					break;
-				}
-				case 53:
-				{
-					removeStudent(school);
-					break;
-				}
-				case 6:
-				{
-					createSemester(se);
-					break;
-				}
-				case 7:
-				{
-					//Trong phien dang ki nay se bao gom cac khoa trong cau 8 ma minh se nhap vao, tuc la trong mot hoc ky thi thuong chi co 1 phien dang ki, neu muon tao phien dang ki khac thi nhap lai lenh nay
-					c = createACourseRegistrationSession(se, c);
-					break;
-				}
-				case 8:
-				{
-					//Co the them nhieu khoa hoc trong mot phien dang ky, neu muon them khoa hoc o phien dang ki khac thi qua lay cau 7 de tao mot phien dang ky moi
-					addACourseToThisSemester(se, c);
-					break;
-				}
-				case 9:
-				{
-					printList(se);
-					break;
-				}
-				case 10:
-				{
+			switch (choice1)
+			{
+			case 1:
+			{
+				createSchoolYear(school);
+				break;
+			}
+			case 2:
+			{
+				inputClass(school);
+				break;
+			}
+			case 3:
+			{
+				inputStudentToClass(school);
+				break;
+			}
+			case 4:
+			{
+				char* name1;
+				enterTheNameOfClass(name1);
+				readToFile((char*)"Data.csv", school, name1);
+				break;
+			}
+			case 5:
+			{
+				char* name2;
+				enterTheNameOfClass(name2);
+				printInfo1Class(school, name2);
+				break;
+			}
+			case 51:
+			{
+				printAllClass(school);
+				break;
+			}
+			case 52:
+			{
+				removeClass(school);
+				break;
+			}
+			case 53:
+			{
+				removeStudent(school);
+				break;
+			}
+			case 6:
+			{
+				createSemester(se);
+				break;
+			}
+			case 7:
+			{
+				//Trong phien dang ki nay se bao gom cac khoa trong cau 8 ma minh se nhap vao, tuc la trong mot hoc ky thi thuong chi co 1 phien dang ki, neu muon tao phien dang ki khac thi nhap lai lenh nay
+				c = createACourseRegistrationSession(se, c);
+				break;
+			}
+			case 8:
+			{
+				//Co the them nhieu khoa hoc trong mot phien dang ky, neu muon them khoa hoc o phien dang ki khac thi qua lay cau 7 de tao mot phien dang ky moi
+				addACourseToThisSemester(se, c);
+				break;
+			}
+			case 9:
+			{
+				printList(se);
+				break;
+			}
+			case 10:
+			{
 
-					break;
-				}
-				case 11:
-				{
+				break;
+			}
+			case 11:
+			{
 
 					break;
 				}

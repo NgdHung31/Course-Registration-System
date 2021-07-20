@@ -153,7 +153,7 @@ void addTail(Semester*& se, course* c);
 course* createACourseRegistrationSession(Semester* se, course* c);
 void addACourseToThisSemester(Semester*& se, course* c);
 void outputCourse(course* c);
-
+void printList(Semester*& se);
 
 //12 - 20
 void initListStudent(listStudent& ls);
@@ -172,4 +172,6 @@ void outputListOfStudentInAClass(School_year* sy, char* name);
 void outputListOfCourses(Semester* se);
 void outputListOfStudentsInACourse(listStudent ls);
 
+//21-25
+void outputListOfStudentsInACourseToCSVfile(listStudent ls);
 #endif

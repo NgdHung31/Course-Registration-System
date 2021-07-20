@@ -1,4 +1,4 @@
-#include "Header.h"
+﻿#include "Header.h"
 
 void registerAAcoount()
 {
@@ -219,7 +219,7 @@ const char* convertSession(int session)
 	}
 }
 
-//1-5
+// 1 - 5
 void enterTheName(char*& name)
 {
 	cin.ignore();
@@ -516,6 +516,36 @@ void printAllClass(School_year* sy)
 		}
 		i++;
 	}
+}
+
+void removeHeadSchoolYear(School_year*& sy)
+{
+	if (sy->head == NULL)
+	{
+		return;
+	}
+	else
+	{
+		Node_class* p = sy->head;
+		sy->head = sy->head->next;
+		delete p;
+	}
+}
+
+void removeTailSchoolYear(School_year*& sy)
+{
+	if (sy->head == NULL)
+	{
+		return;
+	}
+	if (sy->head->next == NULL)
+	{
+		removeHeadSchoolYear(sy);
+	}
+	else
+	{
+	}
+
 }
 
 bool removeClass(School_year*& sy)
@@ -856,6 +886,61 @@ void addACourseToThisSemester(Semester*& se, course* c)
 	addTail(se, c);
 }
 
+void outputCourse(course* c)
+{
+	cout << "\tThe ID of course: " << c->courseID << endl;
+	cout << "\tThe name of course: " << c->courseName << endl;
+	cout << "\tThe name of teacher: " << c->teacherName << endl;
+	cout << "\tThe number of credits: " << c->numberCredits << endl;
+	cout << "\tThe maximum number of students in the course (default 50): " << c->maxStudentCourse << endl;
+	cout << "\ta course registration session: " << c->startDay0 << "/" << c->startMonth0 << " - " << c->endDay0 << "/" << c->endMonth0 << endl;
+	cout << "\t\tThe FRIST day: " << convertDay(c->firstDay) << endl;
+	cout << "\t\tThe FRIST session: " << convertSession(c->firstSession) << endl;
+	cout << "\t\tThe SECOND day: " << convertDay(c->secondDay) << endl;
+	cout << "\t\tThe SECOND session: " << convertSession(c->secondSession) << endl;
+}
+
+void printList(Semester*& se)
+{
+	cout << "\n\t********************VIEW LIST OF COURSE************************" << endl;
+	cout << "\t\t\t\tSEMESTER " << se->createASemester << endl;
+	cout << "\t\t\t\t" << se->startDay << "/" << se->startMonth << " - " << se->endDay << "/" << se->endMonth << endl;
+
+	NODE* temp = se->pHead;
+	int i = 1;
+	if (temp != NULL)
+	{
+		for (temp = se->pHead; temp != NULL; temp = temp->pNext)
+		{
+			const char* ch = checkOrder(i);
+			cout << "\n\t" << i << ch << " course " << endl;
+			outputCourse(temp->data);
+			cout << endl;
+			i++;
+		}
+	}
+	else
+	{
+		cout << "Empty list!\n";
+	}
+}
+
+//**
+void addNode_p_AfterNode_q(course* c, Semester* se)
+{
+	c = new course;
+	addACourseToThisSemester(se,c);
+	for (NODE* k = l->pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data->courseID == x)
+		{
+			NODE* g = p;
+			g->pNext = k->pNext;
+			k->pNext = g;
+		}
+	}
+}
+
 //12-20
 void initListStudent(listStudent& ls)
 {
@@ -869,13 +954,13 @@ void initListCourse(listCourse& lc)
 	lc.pTail = NULL;
 }
 
-void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
+void enrollACourse(Semester*& se, Student *&st,listStudent &ls, listCourse& lc)
 {
 	char* courseID = new char;
-	char* courseName = new char;
+	char* courseName=new char;
 	int n;
 
-	cout << endl << "Enter the number of course you want to enroll (maxium:5): ";
+	cout <<endl<< "Enter the number of course you want to enroll (maxium:5): ";
 	do
 	{
 		cin >> n;
@@ -898,11 +983,18 @@ void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
 		{
 			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
 			{
-				cout << "		Enroll successfully!";
-				Node* p = createNodeStudent(st);
-				addTailStudent(ls, p);
-				NODE* q = createNodeCourse(k->data);
-				addTailCourse(lc, q);
+				for (NODE* i = lc.pHead; i != NULL; i = i->pNext)
+				{
+					//Xét trường hợp đã đăng ký rồi
+					if (checkName(courseName, i->data->courseName) == false && checkName(courseID, i->data->courseID) == false)
+					{
+						cout << "		Enroll successfully !";
+						Node* p = createNodeStudent(st);
+						addTailStudent(ls, p);
+						NODE* q = createNodeCourse(k->data);
+						addTailCourse(lc, q);
+					}
+				}
 			}
 		}
 	}
@@ -1091,41 +1183,5 @@ void outputListOfStudentInAClass(School_year* sy, char* name)
 	if (k == 0)
 	{
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
-	}
-}
-
-void outputListOfCourses(Semester* se)
-{
-	cout << "\n\t---------- LIST OF COURSE ----------" << endl;
-
-	NODE* temp = se->pHead;
-	int i = 1;
-	if (temp != NULL)
-	{
-		for (temp = se->pHead; temp != NULL; temp = temp->pNext)
-		{
-			const char* ch = checkOrder(i);
-			cout << "\n\t" << i << ch << " course " << endl;
-			outputCourse(temp->data);
-			cout << endl;
-			i++;
-		}
-	}
-	else
-	{
-		cout << "Empty list!\n";
-	}
-}
-
-void outputListOfStudentsInACourse(listStudent ls)
-{
-	int i = 1;
-	cout << "\t\t List of students in this course" << endl;
-	for (Node* k = ls.pHead; k != NULL; k = k->next)
-	{
-		cout << endl << "Student number " << i << " :";
-		ouputInfoStudent(k->data);
-		cout << endl;
-		i++;
 	}
 }

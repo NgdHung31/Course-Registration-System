@@ -954,13 +954,13 @@ void initListCourse(listCourse& lc)
 	lc.pTail = NULL;
 }
 
-void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
+void enrollACourse(Semester*& se, Student *&st,listStudent &ls, listCourse& lc)
 {
 	char* courseID = new char;
-	char* courseName = new char;
+	char* courseName=new char;
 	int n;
 
-	cout << endl << "Enter the number of course you want to enroll (maxium:5): ";
+	cout <<endl<< "Enter the number of course you want to enroll (maxium:5): ";
 	do
 	{
 		cin >> n;
@@ -983,11 +983,18 @@ void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc)
 		{
 			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
 			{
-				cout << "		Enroll successfully!";
-				Node* p = createNodeStudent(st);
-				addTailStudent(ls, p);
-				NODE* q = createNodeCourse(k->data);
-				addTailCourse(lc, q);
+				for (NODE* i = lc.pHead; i != NULL; i = i->pNext)
+				{
+					//Xét trường hợp đã đăng ký rồi
+					if (checkName(courseName, i->data->courseName) == false && checkName(courseID, i->data->courseID) == false)
+					{
+						cout << "		Enroll successfully !";
+						Node* p = createNodeStudent(st);
+						addTailStudent(ls, p);
+						NODE* q = createNodeCourse(k->data);
+						addTailCourse(lc, q);
+					}
+				}
 			}
 		}
 	}

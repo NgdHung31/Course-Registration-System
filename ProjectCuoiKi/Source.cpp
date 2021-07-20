@@ -544,6 +544,15 @@ void removeTailSchoolYear(School_year*& sy)
 	}
 	else
 	{
+		for (Node_class* k = sy->head; k != NULL; k = k->next)
+		{
+			if (k->next == sy->tail)
+			{
+				delete sy->tail;
+				k->next = NULL;
+				sy->tail = k;
+			}
+		}
 	}
 
 }

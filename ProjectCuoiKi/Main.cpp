@@ -111,7 +111,7 @@ int main()
 			}
 			case 10:
 			{
-
+				updateInformation(se);
 				break;
 			}
 			case 11:

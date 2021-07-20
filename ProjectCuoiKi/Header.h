@@ -156,6 +156,7 @@ course* createACourseRegistrationSession(Semester* se, course* c);
 void addACourseToThisSemester(Semester*& se, course* c);
 void outputCourse(course* c);
 void printList(Semester*& se);
+void updateInformation(Semester*& se);
 
 //12 - 20
 void initListStudent(listStudent& ls);

@@ -965,6 +965,19 @@ void updateInformation(Semester*& se)
 			cin >> choice;
 			switch (choice)
 			{
+			case 1:
+			{
+				char* ID;
+				cout << "\tEnter The new ID: ";
+				cin.ignore();
+				char temp2[100];
+				cin.getline(temp2, 100);
+				ID = new char[strlen(temp2) + 1];
+				strcpy(ID, temp2);
+
+				swap(ID, temp1->data->courseID);
+				break;
+			}
 			}
 		}
 	}

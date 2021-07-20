@@ -138,6 +138,8 @@ void inputClass(School_year*& sy);
 void readToFile(char* file_name, School_year*& sy, char* name);
 void inputStudentToClass(School_year*& school);
 void ouputInfoStudent(Student* st);
+void printInfo1Class(School_year* sy, char* name);
+void printAllClass(School_year* sy);
 void removeHeadSchoolYear(School_year*& sy);
 void removeTailSchoolYear(School_year*& sy);
 bool removeClass(School_year*& sy);

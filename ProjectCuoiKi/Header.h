@@ -17,13 +17,55 @@ struct Student
 	string month_of_birth;
 	string year_of_birth;
 	string social_id;
-	string the_course_was_register;
 };
 
 struct Node
 {
 	Student* data;
 	Node* next;
+};
+
+struct listStudent
+{
+	Node* pHead;
+	Node* pTail;
+};
+
+struct course
+{
+	//session
+	int firstDay;
+	int firstSession;
+	int secondDay;
+	int secondSession;
+	// info course
+	char* courseID;
+	char* courseName;
+	char* teacherName;
+	int numberCredits;
+	int maxStudentCourse;
+	//List student enroll in course
+	listStudent list_student;
+};
+
+struct NODE
+{
+	course* data;
+	NODE* pNext;
+};
+
+struct session
+{
+	int startDay0;
+	int startMonth0;
+	int endDay0;
+	int endMonth0;
+};
+
+struct listCourse
+{
+	NODE* pHead;
+	NODE* pTail;
 };
 
 struct Class
@@ -47,39 +89,6 @@ struct School_year
 	Node_class* tail;
 };
 
-struct course
-{
-	//start date-end date
-	int startDay0;
-	int startMonth0;
-	//int endYear0;
-	int endDay0;
-	int endMonth0;
-	//session
-	int firstDay;
-	int firstSession;
-	int secondDay;
-	int secondSession;
-	// info course
-	char* courseID;
-	char* courseName;
-	char* teacherName;
-	int numberCredits;
-	int maxStudentCourse;
-};
-
-struct NODE
-{
-	course* data;
-	NODE* pNext;
-};
-
-struct LIST
-{
-	NODE* pHead;
-	NODE* pTail;
-};
-
 struct Semester
 {
 	int createASemester;
@@ -88,18 +97,6 @@ struct Semester
 	int startMonth;
 	int endDay;
 	int endMonth;
-	NODE* pHead;
-	NODE* pTail;
-};
-
-struct listStudent
-{
-	Node* pHead;
-	Node* pTail;
-};
-
-struct listCourse
-{
 	NODE* pHead;
 	NODE* pTail;
 };
@@ -152,11 +149,14 @@ NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
-course* createACourseRegistrationSession(Semester* se, course* c);
-void addACourseToThisSemester(Semester*& se, course* c);
+void createACourseRegistrationSession(Semester* se, course*& c, session& ss);
+course* createACourse(Semester*& se, course* c);
 void outputCourse(course* c);
 void printList(Semester*& se);
 void updateInformation(Semester*& se);
+void deleteHead(Semester*& se);
+void deleteTail(Semester*& se);
+bool deleteCourse(Semester*& se);
 
 //12 - 20
 void initListStudent(listStudent& ls);
@@ -166,16 +166,15 @@ void addTailStudent(listStudent& ls, Node* p);
 void addTailCourse(listCourse& lc, NODE* k);
 Node* createNodeStudent(Student* data);
 void outputListOfEnrolledCourse(listCourse lc);
-void deleteHeadCourse(listCourse& lc);
-void deleteTailCourse(listCourse& lc);
 void removeACourseFromEnrolledList(listCourse& lc);
 void outputListOfYourCourse(listCourse lc);
 void outputListOfClasses(School_year* sy);
 void outputListOfStudentInAClass(School_year* sy, char* name);
+void outputListOfCourses(Semester* se);
+void outputListOfStudentsInACourse(listStudent ls);
 
 
 
 //21-25
-void outputListOfStudentsInACourseToCSVfile(listStudent ls);
-
+void outputListOfStudentsInACourseToCSVfile(Semester*& se);
 #endif

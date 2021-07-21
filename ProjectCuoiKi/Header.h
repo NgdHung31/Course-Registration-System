@@ -152,6 +152,8 @@ void addACourseToThisSemester(Semester*& se, course* c);
 void outputCourse(course* c);
 void printList(Semester*& se);
 void updateInformation(Semester*& se);
+void deleteHead(Semester*& se);
+void deleteTail(Semester*& se);
 bool deleteCourse(Semester*& se);
 
 //12 - 20

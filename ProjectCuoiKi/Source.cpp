@@ -1182,6 +1182,19 @@ void deleteHead(Semester*& se)
 	delete p;
 }
 
+void deleteTail(Semester*& se)
+{
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (k->pNext == se->pTail)
+		{
+			delete se->pTail;
+			k->pNext = NULL;
+			se->pTail = k;
+			return;
+		}
+	}
+
 
 bool deleteCourse(Semester*& se)
 {

@@ -6,6 +6,14 @@
 #include <string>
 using namespace std;
 
+struct Scoreboard
+{
+	string totalMark;
+	string finalMark;
+	string midtermMark;
+	string otherMark;
+};
+
 struct Student
 {
 	string no;
@@ -17,6 +25,7 @@ struct Student
 	string month_of_birth;
 	string year_of_birth;
 	string social_id;
+	Scoreboard score_board;
 };
 
 struct Node
@@ -101,13 +110,6 @@ struct Semester
 	NODE* pTail;
 };
 
-struct Scoreboard
-{
-	float finalMarks;
-	float GPA;
-	float overallGPA;
-};
-
 void registerAAcoount();
 bool checkLoggin(string username, string password);
 void changePassword();
@@ -162,6 +164,7 @@ bool deleteCourse(Semester*& se);
 void initListStudent(listStudent& ls);
 void initListCourse(listCourse& lc);
 void enrollACourse(Semester*& se, Student*& st, listStudent& ls, listCourse& lc);
+bool checkExistingCourse(listCourse& lc, int cFirstDay, int cFirstSession, int cSecondDay, int cSecondSession);
 void addTailStudent(listStudent& ls, Node* p);
 void addTailCourse(listCourse& lc, NODE* k);
 Node* createNodeStudent(Student* data);
@@ -178,5 +181,6 @@ void outputListOfStudentsInACourse(listStudent ls);
 
 
 //21-25
-void outputListOfStudentsInACourseToCSVfile(Semester*& se);;
+void outputListOfStudentsInACourseToCSVfile(Semester*& se);
+void ImportTheScoreboardOfACourse(Semester*& se);
 #endif

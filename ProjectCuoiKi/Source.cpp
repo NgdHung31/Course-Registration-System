@@ -1200,210 +1200,260 @@ bool deleteCourse(Semester * &se)
 
 
 	//12-20
-	void initListStudent(listStudent & ls)
-	{
-		ls.pHead = NULL;
-		ls.pTail = NULL;
-	}
+void initListStudent(listStudent & ls)
+{
+	ls.pHead = NULL;
+	ls.pTail = NULL;
+}
 
-	void initListCourse(listCourse & lc)
-	{
-		lc.pHead = NULL;
-		lc.pTail = NULL;
-	}
+void initListCourse(listCourse & lc)
+{
+	lc.pHead = NULL;
+	lc.pTail = NULL;
+}
 
-	void enrollACourse(Semester * &se, Student * &st, listStudent & ls, listCourse & lc)
-	{
-		char* courseID = new char;
-		char* courseName = new char;
-		int n;
+void enrollACourse(Semester * &se, Student * &st, listStudent & ls, listCourse & lc)
+{
+	cout << "Available courses for this semester\n";
+	printList(se);
 
-		cout << endl << "Enter the number of course you want to enroll (maxium:5): ";
-		do
+	char* courseID = new char;
+	char* courseName = new char;
+	int n;
+
+	cout << endl << "Enter the number of course you want to enroll (maxium:5): ";
+	do
+	{
+		cin >> n;
+		if (n < 1 || n>5)
 		{
-			cin >> n;
-			if (n < 1 || n>5)
-			{
-				cout << "Wrong! Enter again!";
-			}
-		} while (n < 1 || n>5);
+			cout << "Wrong! Enter again!";
+		}
+	} while (n < 1 || n>5);
 
-		for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
+	{
+		cout << endl << "--------------------The " << i + 1 << "course --------------------" << endl;
+		cout << "	Enter the ID of course: ";
+		cin >> courseID;
+
+		cout << "	Enter the name of course: ";
+		cin >> courseName;
+
+		for (NODE* k = se->pHead; k != NULL; k = k->pNext)
 		{
-			cout << endl << "--------------------The " << i + 1 << "course --------------------" << endl;
-			cout << "	Enter the ID of course: ";
-			cin >> courseID;
-
-			cout << "	Enter the name of course: ";
-			cin >> courseName;
-
-			for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
 			{
-				if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+				if (lc.pHead == NULL)
 				{
-					for (NODE* g = lc.pHead; g != NULL; g = g->pNext)
+					cout << "		Enroll successfully!";
+					Node* p = createNodeStudent(st);
+					addTailStudent(ls, p);
+					NODE* q = createNodeCourse(k->data);
+					addTailCourse(lc, q);
+				}
+				else
+				{
+					if (checkExistingCourse(lc, k->data->firstDay, k->data->firstSession, k->data->secondDay, k->data->secondSession) == true)
 					{
-						if (k->data->firstDay == g->data->firstDay && k->data->firstSession == g->data->firstSession && k->data->secondDay == g->data->secondDay && k->data->secondSession == g->data->secondSession)
-						{
-							cout << "\n Sorry! The course has the same sessions as the course you enrolled";
-						}
-						else
-						{
-							cout << "		Enroll successfully!";
-							Node* p = createNodeStudent(st);
-							addTailStudent(ls, p);
-							NODE* q = createNodeCourse(k->data);
-							addTailCourse(lc, q);
-						}
+						cout << "\n Sorry! The course has the same sessions as the course you enrolled";
+						i--;
+					}
+					else
+					{
+						cout << "		Enroll successfully!";
+						Node* p = createNodeStudent(st);
+						addTailStudent(ls, p);
+						NODE* q = createNodeCourse(k->data);
+						addTailCourse(lc, q);
 					}
 				}
+					
 			}
 		}
-
 	}
 
-	void addTailStudent(listStudent & ls, Node * p)
-	{
-		if (ls.pHead == NULL)
-		{
-			ls.pHead = ls.pTail = p;
-		}
-		else
-		{
-			ls.pTail->next = p;
-			ls.pTail = p;
-		}
-	}
+}
 
-	void addTailCourse(listCourse & lc, NODE * k)
+bool checkExistingCourse(listCourse& lc,int cFirstDay, int cFirstSession, int cSecondDay, int cSecondSession)
+{
+	for (NODE* g = lc.pHead; g != NULL; g = g->pNext)
 	{
-		if (lc.pHead == NULL)
+		if (cFirstDay == g->data->firstDay && cFirstSession == g->data->firstSession && cSecondDay == g->data->secondDay && cSecondSession == g->data->secondSession)
 		{
-			lc.pHead = lc.pTail = k;
+			return true;
 		}
-		else
+		return false;
+	}
+}
+
+void addTailStudent(listStudent & ls, Node * p)
+{
+	if (ls.pHead == NULL)
+	{
+		ls.pHead = ls.pTail = p;
+	}
+	else
+	{
+		ls.pTail->next = p;
+		ls.pTail = p;
+	}
+}
+
+void addTailCourse(listCourse & lc, NODE * k)
+{
+	if (lc.pHead == NULL)
+	{
+		lc.pHead = lc.pTail = k;
+	}
+	else
+	{
+		lc.pTail->pNext = k;
+		lc.pTail = k;
+	}
+}
+
+Node* createNodeStudent(Student * data)
+{
+	Node* p = new Node;
+	if (p == NULL)
+	{
+		cout << "Cannot allocate!";
+		return NULL;
+	}
+	p->data = data;
+	p->next = NULL;
+
+	return p;
+}
+
+void outputListOfEnrolledCourse(listCourse lc)
+{
+	int i = 1;
+	cout << "\t\t The course you have enrolled" << endl;
+	for (NODE* p = lc.pHead; p != NULL; p = p->pNext)
+	{
+		cout << "\t The " << i << " course:" << endl;
+		outputCourse(p->data);
+		cout << endl;
+		i++;
+	}
+}
+
+void deleteHeadCourse(listCourse & lc)
+{
+	if (lc.pHead == NULL)
+	{
+		return;
+	}
+	else
+	{
+		NODE* p = lc.pHead;
+		lc.pHead = lc.pHead->pNext;
+		delete p;
+	}
+}
+
+void deleteTailCourse(listCourse & lc)
+{
+	if (lc.pHead == NULL)
+	{
+		return;
+	}
+	if (lc.pHead->pNext == NULL)
+	{
+		deleteHeadCourse(lc);
+	}
+	for (NODE* k = lc.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->pNext == lc.pHead)
 		{
-			lc.pTail->pNext = k;
+			delete lc.pTail;
+			k->pNext = NULL;
 			lc.pTail = k;
 		}
 	}
+}
 
-	Node* createNodeStudent(Student * data)
+void removeACourseFromEnrolledList(listCourse & lc)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	cout << "	Enter the ID of course you want to remove: ";
+	cin >> courseID;
+	cout << "	Enter the name of course you want to remove: ";
+	cin >> courseName;
+
+	if (checkName(courseName, lc.pHead->data->courseName) == true && checkName(courseID, lc.pHead->data->courseID) == true)
 	{
-		Node* p = new Node;
-		if (p == NULL)
-		{
-			cout << "Cannot allocate!";
-			return NULL;
-		}
-		p->data = data;
-		p->next = NULL;
-
-		return p;
+		deleteHeadCourse(lc);
 	}
-
-	void outputListOfEnrolledCourse(listCourse lc)
+	else if (checkName(courseName, lc.pTail->data->courseName) == true && checkName(courseID, lc.pTail->data->courseID) == true)
 	{
-		int i = 1;
-		cout << "\t\t The course you have enrolled" << endl;
-		for (NODE* p = lc.pHead; p != NULL; p = p->pNext)
-		{
-			cout << "\t The " << i << " course:" << endl;
-			outputCourse(p->data);
-			cout << endl;
-		}
+		deleteTailCourse(lc);
 	}
-
-	void deleteHeadCourse(listCourse & lc)
+	else
 	{
-		if (lc.pHead == NULL)
-		{
-			return;
-		}
-		else
-		{
-			NODE* p = lc.pHead;
-			lc.pHead = lc.pHead->pNext;
-			delete p;
-		}
-	}
-
-	void deleteTailCourse(listCourse & lc)
-	{
-		if (lc.pHead == NULL)
-		{
-			return;
-		}
-		if (lc.pHead->pNext == NULL)
-		{
-			deleteHeadCourse(lc);
-		}
+		NODE* g = new NODE;
 		for (NODE* k = lc.pHead; k != NULL; k = k->pNext)
 		{
-			if (k->pNext == lc.pHead)
+			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
 			{
-				delete lc.pTail;
-				k->pNext = NULL;
-				lc.pTail = k;
+				g->pNext = k->pNext;
+				delete k;
+				k = g;
 			}
+			g = k;
 		}
 	}
+}
 
-	void removeACourseFromEnrolledList(listCourse & lc)
+void outputListOfYourCourse(listCourse lc)
+{
+	int i = 1;
+	cout << "\t\t The course you have to study in this semester" << endl;
+	for (NODE* p = lc.pHead; p != NULL; p = p->pNext)
 	{
-		char* courseID = new char;
-		char* courseName = new char;
-
-		cout << "	Enter the ID of course you want to remove: ";
-		cin >> courseID;
-		cout << "	Enter the name of course you want to remove: ";
-		cin >> courseName;
-
-		if (checkName(courseName, lc.pHead->data->courseName) == true && checkName(courseID, lc.pHead->data->courseID) == true)
-		{
-			deleteHeadCourse(lc);
-		}
-		else if (checkName(courseName, lc.pTail->data->courseName) == true && checkName(courseID, lc.pTail->data->courseID) == true)
-		{
-			deleteTailCourse(lc);
-		}
-		else
-		{
-			NODE* g = new NODE;
-			for (NODE* k = lc.pHead; k != NULL; k = k->pNext)
-			{
-				if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
-				{
-					g->pNext = k->pNext;
-					delete k;
-					k = g;
-				}
-				g = k;
-			}
-		}
+		cout << "\t The " << i << " course:" << endl;
+		outputCourse(p->data);
+		cout << endl;
 	}
+}
 
-	void outputListOfYourCourse(listCourse lc)
+void outputListOfClasses(School_year * sy)
+{
+	int i = 1;
+	cout << "--------------------THE INFORMATION CLASS OF THE SCHOOL YEAR--------------------\n";
+	cout << "\tTHE BEGINNING YEAR: " << sy->theBeginningYear << endl;
+	cout << "\tTHE ENDING YEAR: " << sy->theEndYear << endl << endl;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
 	{
-		int i = 1;
-		cout << "\t\t The course you have to study in this semester" << endl;
-		for (NODE* p = lc.pHead; p != NULL; p = p->pNext)
+		cout << "-----------------The class " << i << " -------------------\n";
+		cout << "\t\tThe name class: " << temp->data->class_name << endl;
+		Node* temp1 = temp->data->head;
+		int j = 1;
+		while (temp1 != NULL)
 		{
-			cout << "\t The " << i << " course:" << endl;
-			outputCourse(p->data);
+			const char* ch = checkOrder(j);
+			cout << "\n\t" << j << ch << " student" << endl;
+			ouputInfoStudent(temp1->data);
+			temp1 = temp1->next;
 			cout << endl;
+			j++;
 		}
+		i++;
 	}
+}
 
-	void outputListOfClasses(School_year * sy)
+void outputListOfStudentInAClass(School_year * sy, char* name)
+{
+	int k = 0;
+	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
 	{
-		int i = 1;
-		cout << "---------------THE INFORMATION CLASS OF THE SCHOOL YEAR---------------\n";
-		cout << "\tTHE BEGINNING YEAR: " << sy->theBeginningYear << endl;
-		cout << "\tTHE ENDING YEAR: " << sy->theEndYear << endl << endl;
-		for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
+		if (checkName(temp->data->class_name, name) == true)
 		{
-			cout << "-----------------The class " << i << " -------------------\n";
+			k = 1;
 			cout << "\t\tThe name class: " << temp->data->class_name << endl;
 			Node* temp1 = temp->data->head;
 			int j = 1;
@@ -1416,106 +1466,141 @@ bool deleteCourse(Semester * &se)
 				cout << endl;
 				j++;
 			}
-			i++;
 		}
 	}
-
-	void outputListOfStudentInAClass(School_year * sy, char* name)
+	if (k == 0)
 	{
-		int k = 0;
-		for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
-		{
-			if (checkName(temp->data->class_name, name) == true)
-			{
-				k = 1;
-				cout << "\t\tThe name class: " << temp->data->class_name << endl;
-				Node* temp1 = temp->data->head;
-				int j = 1;
-				while (temp1 != NULL)
-				{
-					const char* ch = checkOrder(j);
-					cout << "\n\t" << j << ch << " student" << endl;
-					ouputInfoStudent(temp1->data);
-					temp1 = temp1->next;
-					cout << endl;
-					j++;
-				}
-			}
-		}
-		if (k == 0)
-		{
-			cout << "Can not see the list student of class to look for. Classroom does not exist!";
-		}
+		cout << "Can not see the list student of class to look for. Classroom does not exist!";
 	}
+}
 
-	void outputListOfCourses(Semester* se)
+void outputListOfCourses(Semester* se)
+{
+	cout << "\n\t---------- LIST OF COURSE ----------" << endl;
+
+	NODE* temp = se->pHead;
+	int i = 1;
+	if (temp != NULL)
 	{
-		cout << "\n\t---------- LIST OF COURSE ----------" << endl;
-
-		NODE* temp = se->pHead;
-		int i = 1;
-		if (temp != NULL)
+		for (temp = se->pHead; temp != NULL; temp = temp->pNext)
 		{
-			for (temp = se->pHead; temp != NULL; temp = temp->pNext)
-			{
-				const char* ch = checkOrder(i);
-				cout << "\n\t" << i << ch << " course " << endl;
-				outputCourse(temp->data);
-				cout << endl;
-				i++;
-			}
-		}
-		else
-		{
-			cout << "Empty list!\n";
-		}
-	}
-
-	void outputListOfStudentsInACourse(listStudent ls)
-	{
-		int i = 1;
-		cout << "\t\t List of students in this course" << endl;
-		for (Node* k = ls.pHead; k != NULL; k = k->next)
-		{
-			cout << endl << "Student number " << i << " :";
-			ouputInfoStudent(k->data);
+			const char* ch = checkOrder(i);
+			cout << "\n\t" << i << ch << " course " << endl;
+			outputCourse(temp->data);
 			cout << endl;
 			i++;
 		}
 	}
-	//
-
-	void outputListOfStudentsInACourseToCSVfile(Semester * &se)
+	else
 	{
-		char* courseID = new char;
-		char* courseName = new char;
+		cout << "Empty list!\n";
+	}
+}
 
-		ofstream ofile("ListStudentInACourse.csv");
+void outputListOfStudentsInACourse(listStudent ls)
+{
+	int i = 1;
+	cout << "\t\t List of students in this course" << endl;
+	for (Node* k = ls.pHead; k != NULL; k = k->next)
+	{
+		cout << endl << "Student number " << i << " :";
+		ouputInfoStudent(k->data);
+		cout << endl;
+		i++;
+	}
+}
+//21 - 25
 
-		cout << "	Enter the ID of course: ";
-		cin >> courseID;
+void outputListOfStudentsInACourseToCSVfile(Semester*& se)
+{
+	char* courseID = new char;
+	char* courseName = new char;
 
-		cout << "	Enter the name of course: ";
-		cin >> courseName;
+	ofstream ofile("ListStudentInACourse.csv");
+	ofile << "No,";
+	ofile << "Student ID,";
+	ofile << "First Name,";
+	ofile << "Last Name,";
+	ofile << "Gender,";
+	ofile << "Day of birth,";
+	ofile << "Month of birth,";
+	ofile << "Year of birth,";
+	ofile << "Social ID,";
+	ofile << "Total Mark,";
+	ofile << "Final Mark,";
+	ofile << "Midterm Mark,";
+	ofile << "Other Mark\n";
 
-		for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	cout << "	Enter the ID of course: ";
+	cin >> courseID;
+
+	cout << "	Enter the name of course: ";
+	cin >> courseName;
+
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
 		{
-			if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+			for (Node* q = k->data->list_student.pHead; q != NULL; q = q->next)
 			{
-				for (Node* q = k->data->list_student.pHead; q != NULL; q = q->next)
-				{
-					ofile << q->data->no << ",";
-					ofile << q->data->student_id << ",";
-					ofile << q->data->first_name << ",";
-					ofile << q->data->last_name << ",";
-					ofile << q->data->gender << ",";
-					ofile << q->data->day_of_birth << ",";
-					ofile << q->data->month_of_birth << ",";
-					ofile << q->data->year_of_birth << ",";
-					ofile << q->data->social_id << "\n";
-				}
+				ofile << q->data->no << ",";
+				ofile << q->data->student_id << ",";
+				ofile << q->data->first_name << ",";
+				ofile << q->data->last_name << ",";
+				ofile << q->data->gender << ",";
+				ofile << q->data->day_of_birth << ",";
+				ofile << q->data->month_of_birth << ",";
+				ofile << q->data->year_of_birth << ",";
+				ofile << q->data->social_id << "\n";
 			}
 		}
-
-		ofile.close();
 	}
+
+	ofile.close();
+}
+
+void ImportTheScoreboardOfACourse(Semester*& se)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	ifstream ofile("ListStudentInACourse.csv");
+
+	cout << "	Enter the ID of course: ";
+	cin >> courseID;
+
+	cout << "	Enter the name of course: ";
+	cin >> courseName;
+
+
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+		{
+			//skip first line
+			string skip_first_line;
+			getline(ofile, skip_first_line, '\n');
+
+			//read data
+			Node* temp = k->data->list_student.pHead;
+
+			while (ofile.good())
+			{
+				getline(ofile, temp->data->no, ',');
+				getline(ofile, temp->data->student_id, ',');
+				getline(ofile, temp->data->first_name, ',');
+				getline(ofile, temp->data->last_name, ',');
+				getline(ofile, temp->data->gender, ',');
+				getline(ofile, temp->data->day_of_birth, ',');
+				getline(ofile, temp->data->month_of_birth, ',');
+				getline(ofile, temp->data->year_of_birth, ',');
+				getline(ofile, temp->data->social_id, ',');
+				getline(ofile, temp->data->score_board.totalMark, ',');
+				getline(ofile, temp->data->score_board.finalMark, ',');
+				getline(ofile, temp->data->score_board.midtermMark, ',');
+				getline(ofile, temp->data->score_board.otherMark, '\n');
+				temp = temp->next;
+			}
+		}
+	}
+}

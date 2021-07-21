@@ -40,6 +40,7 @@ int main()
 		cout << "10. Update course information.\n";
 		cout << "11. Delete a course.\n";
 		cout << "21. Export list of students in a course to a CSV file\n";
+		cout << "22. Import CSV file to the scoreboard of a course.\n";
 		cout << "0. Log out.\n";
 
 		do
@@ -129,6 +130,10 @@ int main()
 			{
 				outputListOfStudentsInACourseToCSVfile(se);
 				break;
+			}
+			case 22:
+			{
+				ImportTheScoreboardOfACourse(se);
 			}
 			case 0:
 			{
@@ -244,3 +249,4 @@ int main()
 		} while (choice2 != 4);
 	}
 }
+

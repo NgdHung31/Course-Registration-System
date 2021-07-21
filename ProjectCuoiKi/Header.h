@@ -27,8 +27,23 @@ struct Node
 
 struct listStudent
 {
+	char* class_name;
 	Node* pHead;
 	Node* pTail;
+};
+
+struct Node_class
+{
+	Class* data;
+	Node_class* next;
+};
+
+struct School_year
+{
+	int theBeginningYear;
+	int theEndYear;
+	Node_class* head;
+	Node_class* tail;
 };
 
 struct course
@@ -176,5 +191,5 @@ void outputListOfStudentsInACourse(listStudent ls);
 
 
 //21-25
-void outputListOfStudentsInACourseToCSVfile(Semester*& se);
+void outputListOfStudentsInACourseToCSVfile(listStudent ls);
 #endif

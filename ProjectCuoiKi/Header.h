@@ -50,7 +50,7 @@ struct course
 	char* teacherName;
 	int numberCredits;
 	int maxStudentCourse;
-	//List student enroll in this course
+	//List student enroll in course
 	listStudent list_student;
 };
 

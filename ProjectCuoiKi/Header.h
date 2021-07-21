@@ -17,13 +17,53 @@ struct Student
 	string month_of_birth;
 	string year_of_birth;
 	string social_id;
-	string the_course_was_register;
 };
 
 struct Node
 {
 	Student* data;
 	Node* next;
+};
+
+struct listStudent
+{
+	Node* pHead;
+	Node* pTail;
+};
+
+struct course
+{
+	//start date-end date
+	int startDay0;
+	int startMonth0;
+	//int endYear0;
+	int endDay0;
+	int endMonth0;
+	//session
+	int firstDay;
+	int firstSession;
+	int secondDay;
+	int secondSession;
+	// info course
+	char* courseID;
+	char* courseName;
+	char* teacherName;
+	int numberCredits;
+	int maxStudentCourse;
+	//List student enroll in this course
+	listStudent list_student;
+};
+
+struct NODE
+{
+	course* data;
+	NODE* pNext;
+};
+
+struct listCourse
+{
+	NODE* pHead;
+	NODE* pTail;
 };
 
 struct Class
@@ -47,39 +87,6 @@ struct School_year
 	Node_class* tail;
 };
 
-struct course
-{
-	//start date-end date
-	int startDay0;
-	int startMonth0;
-	//int endYear0;
-	int endDay0;
-	int endMonth0;
-	//session
-	int firstDay;
-	int firstSession;
-	int secondDay;
-	int secondSession;
-	// info course
-	char* courseID;
-	char* courseName;
-	char* teacherName;
-	int numberCredits;
-	int maxStudentCourse;
-};
-
-struct NODE
-{
-	course* data;
-	NODE* pNext;
-};
-
-struct LIST
-{
-	NODE* pHead;
-	NODE* pTail;
-};
-
 struct Semester
 {
 	int createASemester;
@@ -88,18 +95,6 @@ struct Semester
 	int startMonth;
 	int endDay;
 	int endMonth;
-	NODE* pHead;
-	NODE* pTail;
-};
-
-struct listStudent
-{
-	Node* pHead;
-	Node* pTail;
-};
-
-struct listCourse
-{
 	NODE* pHead;
 	NODE* pTail;
 };
@@ -157,6 +152,7 @@ void addACourseToThisSemester(Semester*& se, course* c);
 void outputCourse(course* c);
 void printList(Semester*& se);
 void updateInformation(Semester*& se);
+bool deleteCourse(Semester*& se);
 
 //12 - 20
 void initListStudent(listStudent& ls);
@@ -176,5 +172,5 @@ void outputListOfStudentInAClass(School_year* sy, char* name);
 
 
 //21-25
-void outputListOfStudentsInACourseToCSVfile(listStudent ls);
+void outputListOfStudentsInACourseToCSVfile(Semester*& se);;
 #endif

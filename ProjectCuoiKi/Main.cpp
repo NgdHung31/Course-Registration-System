@@ -39,6 +39,7 @@ int main()
 		cout << "9. View list of courses.\n";
 		cout << "10. Update course information.\n";
 		cout << "11. Delete a course.\n";
+		cout << "21. Export list of students in a course to a CSV file\n";
 		cout << "0. Log out.\n";
 
 		do
@@ -123,6 +124,11 @@ int main()
 			case 11:
 			{
 				deleteCourse(se);
+				break;
+			}
+			case 21:
+			{
+				outputListOfStudentsInACourseToCSVfile(se);
 				break;
 			}
 			case 0:

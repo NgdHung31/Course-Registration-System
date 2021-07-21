@@ -1008,6 +1008,44 @@ void printList(Semester*& se)
 	}
 }
 
+bool deleteCourse(Semester*& se)
+{
+	char* ID;
+	cout << "\tEnter The ID: ";
+	cin.ignore();
+	char temp2[100];
+	cin.getline(temp2, 100);
+	ID = new char[strlen(temp2) + 1];
+	strcpy(ID, temp2);
+
+	NODE* temp1 = NULL;
+	for (NODE* temp = se->pHead; temp != NULL; temp = temp->pNext)
+	{
+		if (checkName(ID, temp->data->courseID))
+		{
+			if (temp == se->pHead)
+			{
+				deleteHead(se);
+				return true;
+			}
+			else if (temp == se->pTail)
+			{
+				deleteTail(se);
+				return true;
+			}
+			else
+			{
+				temp1->pNext = temp->pNext;
+				delete temp;
+				temp = temp1;
+				return true;
+			}
+		}
+		temp1 = temp;
+	}
+	return false;
+}
+
 //**
 void updateInformation(Semester*& se)
 {
@@ -1304,4 +1342,39 @@ void outputListOfStudentInAClass(School_year* sy, char* name)
 	{
 		cout << "Can not see the list student of class to look for. Classroom does not exist!";
 	}
+}
+
+void outputListOfStudentsInACourseToCSVfile(Semester*& se)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	ofstream ofile("ListStudentInACourse.csv");
+
+	cout << "	Enter the ID of course: ";
+	cin >> courseID;
+
+	cout << "	Enter the name of course: ";
+	cin >> courseName;
+
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+		{
+			for (Node* q = k->data->list_student.pHead; q != NULL; q = q->next)
+			{
+				ofile << q->data->no << ",";
+				ofile << q->data->student_id << ",";
+				ofile << q->data->first_name << ",";
+				ofile << q->data->last_name << ",";
+				ofile << q->data->gender << ",";
+				ofile << q->data->day_of_birth << ",";
+				ofile << q->data->month_of_birth << ",";
+				ofile << q->data->year_of_birth << ",";
+				ofile << q->data->social_id << "\n";
+			}
+		}
+	}
+
+	ofile.close();
 }

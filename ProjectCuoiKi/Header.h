@@ -178,8 +178,7 @@ void outputListOfStudentInAClass(School_year* sy, char* name);
 void outputListOfCourses(Semester* se);
 void outputListOfStudentsInACourse(listStudent ls);
 
-
-
 //21-25
 void outputListOfStudentsInACourseToCSVfile(Semester*& se);
+void ImportTheScoreboardOfACourse(Semester*& se);
 #endif

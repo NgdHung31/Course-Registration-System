@@ -1509,14 +1509,27 @@ void outputListOfStudentsInACourse(listStudent ls)
 		i++;
 	}
 }
-//
+//21-25
 
-void outputListOfStudentsInACourseToCSVfile(Semester * &se)
+void outputListOfStudentsInACourseToCSVfile(Semester*& se)
 {
 	char* courseID = new char;
 	char* courseName = new char;
 
 	ofstream ofile("ListStudentInACourse.csv");
+	ofile << "No,";
+	ofile << "Student ID,";
+	ofile << "First Name,";
+	ofile << "Last Name,";
+	ofile << "Gender,";
+	ofile << "Day of birth,";
+	ofile << "Month of birth,";
+	ofile << "Year of birth,";
+	ofile << "Social ID,";
+	ofile << "Total Mark,";
+	ofile << "Final Mark,";
+	ofile << "Midterm Mark,";
+	ofile << "Other Mark\n";
 
 	cout << "	Enter the ID of course: ";
 	cin >> courseID;
@@ -1544,4 +1557,50 @@ void outputListOfStudentsInACourseToCSVfile(Semester * &se)
 	}
 
 	ofile.close();
+}
+
+void ImportTheScoreboardOfACourse(Semester*& se)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	ifstream ofile("ListStudentInACourse.csv");
+
+	cout << "	Enter the ID of course: ";
+	cin >> courseID;
+
+	cout << "	Enter the name of course: ";
+	cin >> courseName;
+
+
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+		{
+			//skip first line
+			string skip_first_line;
+			getline(ofile, skip_first_line, '\n');
+
+			//read data
+			Node* temp = k->data->list_student.pHead;
+
+			while (ofile.good())
+			{
+				getline(ofile, temp->data->no, ',');
+				getline(ofile, temp->data->student_id, ',');
+				getline(ofile, temp->data->first_name, ',');
+				getline(ofile, temp->data->last_name, ',');
+				getline(ofile, temp->data->gender, ',');
+				getline(ofile, temp->data->day_of_birth, ',');
+				getline(ofile, temp->data->month_of_birth, ',');
+				getline(ofile, temp->data->year_of_birth, ',');
+				getline(ofile, temp->data->social_id, ',');
+				getline(ofile, temp->data->score_board.totalMark, ',');
+				getline(ofile, temp->data->score_board.finalMark, ',');
+				getline(ofile, temp->data->score_board.midtermMark, ',');
+				getline(ofile, temp->data->score_board.otherMark, '\n');
+				temp = temp->next;
+			}
+		}
+	}
 }

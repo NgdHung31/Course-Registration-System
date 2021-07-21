@@ -1008,6 +1008,170 @@ void printList(Semester*& se)
 	}
 }
 
+void updateInformation(Semester*& se)
+{
+	char* ID;
+	int choice;
+	cout << "--------------------- UPDATE YOUR COURSE INFORMATION -----------------------";
+
+	cout << "\nEnter the ID of course needed to update: ";
+	cin.ignore();
+	char temp[100];
+	cin.getline(temp, 100);
+	ID = new char[strlen(temp) + 1];
+	strcpy(ID, temp);
+
+	for (NODE* temp1 = se->pHead; temp1 != NULL; temp1 = temp1->pNext)
+	{
+		if (checkName(ID, temp1->data->courseID))
+		{
+			cout << "--------------------- What would you like to have updated in the course? ---------------------\n";
+			cout << "\tChoice 1: Update ID.\n";
+			cout << "\tChoice 2: Update the name of the course.\n";
+			cout << "\tChoice 3: Update the name of the teacher.\n";
+			cout << "\tChoice 4: Update The number of credits.\n";
+			cout << "\tChoice 5: The maximum number of students in the course.\n";
+			cout << "\tChoice 6: Update the day of week.\n";
+			cout << "\tChoice 7: Update the time session.\n";
+
+			cout << "\nEnter yours choice: ";
+			cin >> choice;
+			switch (choice)
+			{
+			case 1:
+			{
+				char* ID;
+				cout << "\tEnter The new ID: ";
+				cin.ignore();
+				char temp2[100];
+				cin.getline(temp2, 100);
+				ID = new char[strlen(temp2) + 1];
+				strcpy(ID, temp2);
+
+				swap(ID, temp1->data->courseID);
+				break;
+			}
+			case 2:
+			{
+				char* courseName;
+				char temp2[100];
+				cin.ignore();
+				cout << "Enter the name name of course: ";
+				cin.getline(temp2, 100);
+				courseName = new char[strlen(temp2) + 1];
+				strcpy(courseName, temp2);
+
+				swap(courseName, temp1->data->courseName);
+				break;
+			}
+			case 3:
+			{
+				char* teacherName;
+				char temp2[100];
+				cin.ignore();
+				cout << "Enter the new name of the teacher: ";
+				cin.getline(temp2, 100, '\n');
+				teacherName = new char[strlen(temp2) + 1];
+				strcpy(teacherName, temp2);
+
+				swap(teacherName, temp1->data->teacherName);
+				break;
+			}
+			case 4:
+			{
+				int credit;
+				cout << "Enter The new number of credits:  ";
+				cin >> credit;
+
+				swap(credit, temp1->data->numberCredits);
+				break;
+			}
+			case 5:
+			{
+				int max;
+				cout << "Enter The new maximum number of students in the course: ";
+				cin >> max;
+
+				swap(max, temp1->data->maxStudentCourse);
+				break;
+			}
+			case 6:
+			{
+				int firstDay, secondDay;
+				cout << "\t****DAY OF WEEK****\n";
+				cout << "\tchoose 2: MONDAY\n";
+				cout << "\tchoose 3: TUESDAY\n";
+				cout << "\tchoose 4: WEDNESDAY\n";
+				cout << "\tchoose 5: THURSDAY\n";
+				cout << "\tchoose 6: FRIDAY\n";
+				cout << "\tchoose 7: SATURDAY\n";
+				do {
+					do
+					{
+						cout << "Enter The new first day: ";
+						cin >> firstDay;
+						if (firstDay < 2 || firstDay > 7)
+							cout << "FAULT! PLEASE RE-ENTER" << endl;
+					} while (firstDay < 2 || firstDay > 7);
+
+					do
+					{
+						cout << "Enter The new second day: ";
+						cin >> secondDay;
+						if (firstDay < 2 || firstDay > 7)
+							cout << "FAULT! PLEASE RE-ENTER" << endl;
+					} while (firstDay < 2 || firstDay > 7);
+					if (firstDay == secondDay)
+					{
+						cout << "***Two sessions have been scheduled at the same time.\n";
+						cout << "PLEASE RE-ENTER" << endl;
+					}
+				} while (firstDay == secondDay);
+
+				swap(firstDay, temp1->data->firstDay);
+				swap(secondDay, temp1->data->secondDay);
+				break;
+
+			}
+			case 7:
+			{
+				int firstSession;
+				int secondSession;
+				cout << "****THE TIME SESSION****\n";
+				cout << "S1: 07:30\n";
+				cout << "S2: 09:30\n";
+				cout << "S3: 13:30\n";
+				cout << "S4: 15:30\n";
+
+				do
+				{
+					cout << "Enter The new session: S";
+					cin >> firstSession;
+					if (firstSession < 1 || firstSession > 4)
+					{
+						cout << "FAULT! PLEASE RE-ENTER" << endl;
+					}
+				} while (firstSession < 1 || firstSession >4);
+
+				do
+				{
+					cout << "Enter The new session: S";
+					cin >> secondSession;
+					if (firstSession < 1 || firstSession > 4)
+					{
+						cout << "FAULT! PLEASE RE-ENTER" << endl;
+					}
+				} while (firstSession < 1 || firstSession > 4);
+				swap(firstSession, temp1->data->firstSession);
+				swap(secondSession, temp1->data->secondSession);
+				break;
+			}
+			}
+		}
+	}
+}
+
+
 bool deleteCourse(Semester*& se)
 {
 	char* ID;
@@ -1046,54 +1210,7 @@ bool deleteCourse(Semester*& se)
 	return false;
 }
 
-//**
-void updateInformation(Semester*& se)
-{
-	char* ID;
-	int choice;
-	cout << "--------------------------------------------------UPDATE YOUR COURSE INFORMATION:---------------------------------------------------";
 
-	cout << "\nEnter the ID of course needed to update: ";
-	cin.ignore();
-	char temp[100];
-	cin.getline(temp, 100);
-	ID = new char[strlen(temp) + 1];
-	strcpy(ID, temp);
-
-	for (NODE* temp1 = se->pHead; temp1 != NULL; temp1 = temp1->pNext)
-	{
-		if (checkName(ID, temp1->data->courseID))
-		{
-			cout << "--------------------------------------------------What would you like to have updated in the course?--------------------------------------------------\n";
-			cout << "\tChoice 1: Update ID.\n";
-			cout << "\tChoice 2: Update the name of the course.\n";
-			cout << "\tChoice 3: Update the name of the teacher.\n";
-			cout << "\tChoice 4: Update The number of credits.\n";
-			cout << "\tChoice 5: The maximum number of students in the course.\n";
-			cout << "\tChoice 6: Update the day of week.\n";
-			cout << "\tChoice 7: Update the time session.\n";
-
-			cout << "\nEnter yours choice: ";
-			cin >> choice;
-			switch (choice)
-			{
-			case 1:
-			{
-				char* ID;
-				cout << "\tEnter The new ID: ";
-				cin.ignore();
-				char temp2[100];
-				cin.getline(temp2, 100);
-				ID = new char[strlen(temp2) + 1];
-				strcpy(ID, temp2);
-
-				swap(ID, temp1->data->courseID);
-				break;
-			}
-			}
-		}
-	}
-}
 
 //12-20
 void initListStudent(listStudent& ls)

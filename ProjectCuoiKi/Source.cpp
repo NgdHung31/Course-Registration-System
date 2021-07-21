@@ -1171,6 +1171,17 @@ void updateInformation(Semester*& se)
 	}
 }
 
+void deleteHead(Semester*& se)
+{
+	if (se->pHead == NULL)
+	{
+		return;
+	}
+	NODE* p = se->pHead;
+	se->pHead = se->pHead->pNext;
+	delete p;
+}
+
 
 bool deleteCourse(Semester*& se)
 {

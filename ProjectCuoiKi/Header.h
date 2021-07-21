@@ -27,23 +27,8 @@ struct Node
 
 struct listStudent
 {
-	char* class_name;
 	Node* pHead;
 	Node* pTail;
-};
-
-struct Node_class
-{
-	Class* data;
-	Node_class* next;
-};
-
-struct School_year
-{
-	int theBeginningYear;
-	int theEndYear;
-	Node_class* head;
-	Node_class* tail;
 };
 
 struct course
@@ -181,6 +166,8 @@ void addTailStudent(listStudent& ls, Node* p);
 void addTailCourse(listCourse& lc, NODE* k);
 Node* createNodeStudent(Student* data);
 void outputListOfEnrolledCourse(listCourse lc);
+void deleteHeadCourse(listCourse& lc);
+void deleteTailCourse(listCourse& lc);
 void removeACourseFromEnrolledList(listCourse& lc);
 void outputListOfYourCourse(listCourse lc);
 void outputListOfClasses(School_year* sy);
@@ -191,5 +178,5 @@ void outputListOfStudentsInACourse(listStudent ls);
 
 
 //21-25
-void outputListOfStudentsInACourseToCSVfile(listStudent ls);
+void outputListOfStudentsInACourseToCSVfile(Semester*& se);;
 #endif

@@ -60,6 +60,14 @@ struct NODE
 	NODE* pNext;
 };
 
+struct session
+{
+	int startDay0;
+	int startMonth0;
+	int endDay0;
+	int endMonth0;
+};
+
 struct listCourse
 {
 	NODE* pHead;

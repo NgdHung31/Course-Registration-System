@@ -100,15 +100,14 @@ int main()
 			}
 			case 7:
 			{
-				//Trong phien dang ki nay se bao gom cac khoa trong cau 8 ma minh se nhap vao, tuc la trong mot hoc ky thi thuong chi co 1 phien dang ki, neu muon tao phien dang ki khac thi nhap lai lenh nay
-				//7
-				c = createACourseRegistrationSession(se, c);//7
+				session ss;
+				createACourseRegistrationSession(se, c, ss);
 				break;
 			}
 			case 8:
 			{
-				//Co the them nhieu khoa hoc trong mot phien dang ky, neu muon them khoa hoc o phien dang ki khac thi qua lay cau 7 de tao mot phien dang ky moi
-				addACourseToThisSemester(se, c);//8
+				course* c = new course;
+				c = createACourse(se, c);
 				break;
 			}
 			case 9:

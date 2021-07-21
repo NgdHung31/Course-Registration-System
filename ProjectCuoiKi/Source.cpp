@@ -144,37 +144,6 @@ const char* checkOrder(int n)
 	}
 }
 
-bool checkStartDateInCourse(int day_course, int month_course, int day_semester, int month_semester)
-{
-	if (month_course < month_semester)
-	{
-		return false;
-	}
-	else if (month_course = month_semester)
-	{
-		if (day_course < day_semester)
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
-bool checkEndDateInCourse(int day_course, int month_course, int day_semester, int month_semester)
-{
-	if (month_course > month_semester) {
-		return false;
-	}
-	else if (month_course = month_semester)
-	{
-		if (day_course > day_semester)
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
 const char* convertDay(int day)
 {
 	switch (day)

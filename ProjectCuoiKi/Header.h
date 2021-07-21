@@ -33,12 +33,6 @@ struct listStudent
 
 struct course
 {
-	//start date-end date
-	int startDay0;
-	int startMonth0;
-	//int endYear0;
-	int endDay0;
-	int endMonth0;
 	//session
 	int firstDay;
 	int firstSession;

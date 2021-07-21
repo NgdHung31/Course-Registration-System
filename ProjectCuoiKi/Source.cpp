@@ -706,6 +706,18 @@ void createSemester(Semester*& se)
 	if (1 <= se->createASemester && se->createASemester <= 3)
 	{
 		cout << "\nNow, your semester is " << se->createASemester << ".";
+		if (se->createASemester == 1)
+		{
+			cout << "Fall";
+		}
+		else if (se->createASemester == 2)
+		{
+			cout << "Summer";
+		}
+		else if (se->createASemester == 3)
+		{
+			cout << "Winter";
+		}
 		do
 		{
 			cout << "\nEnter the school year: ";
@@ -716,31 +728,93 @@ void createSemester(Semester*& se)
 			}
 		} while (se->schoolYear < 2021);
 
-		cout << "Enter the start date semester: " << endl;
-		do
+		if (se->createASemester == 1)
 		{
-			cout << '\t' << "Day: ";
-			cin >> se->startDay;
-			cout << '\t' << "Month: ";
-			cin >> se->startMonth;
-			if (checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false)
+			cout << "Enter the start date semester: " << endl;
+			do
 			{
-				cout << "FAULT!!! PLEASE RE-ENTER." << endl;
-			}
-		} while (checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false);
+				cout << '\t' << "Day: ";
+				cin >> se->startDay;
+				cout << '\t' << "Month: ";
+				cin >> se->startMonth;
+				if ((checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false) || ((se->startMonth < 9) || (se->startMonth > 11)))
+				{
+					cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+				}
+			} while ((checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false) || ((se->startMonth < 9) || (se->startMonth > 11)));
 
-		cout << "Enter the end date semester: " << endl;
-		do
-		{
-			cout << '\t' << "Day: ";
-			cin >> se->endDay;
-			cout << '\t' << "Month: ";
-			cin >> se->endMonth;
-			if (checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false)
+			cout << "Enter the end date semester: " << endl;
+			do
 			{
-				cout << "FAULT!!! PLEASE RE-ENTER." << endl;
-			}
-		} while (checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false);
+				cout << '\t' << "Day: ";
+				cin >> se->endDay;
+				cout << '\t' << "Month: ";
+				cin >> se->endMonth;
+				if ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth < 9) || (se->endMonth > 11)))
+				{
+					cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+				}
+			} while ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth < 9) || (se->endMonth > 11)));
+		}
+
+		if (se->createASemester == 2)
+		{
+			cout << "Enter the start date semester: " << endl;
+			do
+			{
+				cout << '\t' << "Day: ";
+				cin >> se->startDay;
+				cout << '\t' << "Month: ";
+				cin >> se->startMonth;
+				if ((checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false) || ((se->startMonth < 6) || (se->startMonth > 8)))
+				{
+					cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+				}
+			} while ((checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false) || ((se->startMonth < 6) || (se->startMonth > 8)));
+
+			cout << "Enter the end date semester: " << endl;
+			do
+			{
+				cout << '\t' << "Day: ";
+				cin >> se->endDay;
+				cout << '\t' << "Month: ";
+				cin >> se->endMonth;
+				if ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth < 6) || (se->endMonth > 8)))
+				{
+					cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+				}
+			} while ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth < 6) || (se->endMonth > 8)));
+		}
+
+		if (se->createASemester == 3)
+		{
+			cout << "Enter the start date semester: " << endl;
+			do
+			{
+				cout << '\t' << "Day: ";
+				cin >> se->startDay;
+				cout << '\t' << "Month: ";
+				cin >> se->startMonth;
+				if ((checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false) || ((se->startMonth != 12) && (se->startMonth > 2)))
+				{
+					cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+				}
+			} while ((checkDate(to_string(se->startDay), to_string(se->startMonth), to_string(se->schoolYear)) == false) || ((se->startMonth != 12) && (se->startMonth > 2)));
+
+			cout << "Enter the end date semester: " << endl;
+			do
+			{
+				cout << '\t' << "Day: ";
+				cin >> se->endDay;
+				cout << '\t' << "Month: ";
+				cin >> se->endMonth;
+				if ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth != 12) && (se->endMonth > 2)))
+				{
+					cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+				}
+			} while ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth != 12) && (se->endMonth > 2)));
+		}
+
 	}
 	else
 	{

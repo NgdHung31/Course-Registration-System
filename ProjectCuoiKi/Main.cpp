@@ -25,23 +25,23 @@ int main()
 	{
 		system("cls");
 		cout << "----------Staff Member----------\n";
-		cout << "1. Create a school year (2020-2021, for example)\n";
-		cout << "2. Create several classes for 1st year students. For example: class 20APCS1, class 20APCS2, class 20CLC1..., class 20CLC11, class 20VP...\n";
-		cout << "3. Add new 1st year students to 1st-year classes\n";
-		cout << "4. He/she want to import a CSV file containing all students in a specific class to the system.\n";
-		cout << "5. He/she want to see list student.\n";
+		cout << "1.  Create a school year (2020-2021, for example)\n";
+		cout << "2.  Create several classes for 1st year students. For example: class 20APCS1, class 20APCS2, class 20CLC1..., class 20CLC11, class 20VP...\n";
+		cout << "3.  Add new 1st year students to 1st-year classes\n";
+		cout << "4.  He/she want to import a CSV file containing all students in a specific class to the system.\n";
+		cout << "5.  He/she want to see list student.\n";
 		cout << "51. He/she want to see all classes\n";
 		cout << "52. He/she want to remove the class.\n";
 		cout << "53. He/she want to remove the student.\n";
-		cout << "6. Create a semester.\n";
-		cout << "7. Create a course registration session.\n";
-		cout << "8. Add a course to this semester.\n";
-		cout << "9. View list of courses.\n";
+		cout << "6.  Create a semester.\n";
+		cout << "7.  Create a course registration session.\n";
+		cout << "8.  Add a course to this semester.\n";
+		cout << "9.  View list of courses.\n";
 		cout << "10. Update course information.\n";
 		cout << "11. Delete a course.\n";
 		cout << "21. Export list of students in a course to a CSV file\n";
 		cout << "22. Import CSV file to the scoreboard of a course.\n";
-		cout << "0. Log out.\n";
+		cout << "0.  Log out.\n";
 
 		do
 		{
@@ -107,7 +107,6 @@ int main()
 			}
 			case 8:
 			{
-				course* c = new course;
 				c = createACourse(se, c);
 				break;
 			}
@@ -143,14 +142,14 @@ int main()
 		} while (choice1 != 0);
 	}
 
-	if (type == 1)
+	if (type == 2)
 	{
 		system("cls");
 		cout << "----------Student----------\n";
-		cout << "1. Register\n";
-		cout << "2. Log in\n";
-		cout << "3. Change password\n";
-		cout << "4. Logout\n";
+		cout << "1.  Register\n";
+		cout << "2.  Log in\n";
+		cout << "3.  Change password\n";
+		cout << "4.  Logout\n";
 		cout << "13. Enroll in a course.\n";
 		cout << "14. View list of enrolled courses.\n";
 		cout << "15. Remove a course from the enrolled list.\n";

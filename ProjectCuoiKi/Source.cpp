@@ -1605,6 +1605,39 @@ void ImportTheScoreboardOfACourse(Semester*& se)
 	}
 }
 
+void ViewScoreBoardInACourse(Semester*& se)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	cout << "------------------------------------------SCOREBOARD OF A COURSE-----------------------------------------------\n";
+	cout << "	Enter the ID of course: ";
+	cin >> courseID;
+
+	cout << "	Enter the name of course: ";
+	cin >> courseName;
+
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+		{
+			for (Node* i = k->data->list_student.pHead; i != NULL; i = i->next)
+			{
+				cout << "No: " << i->data->no << endl;
+				cout << "\tStudent ID: " << i->data->student_id << endl;
+				cout << "\tName: " << i->data->first_name << " " << i->data->last_name << endl;
+				cout << "\tGender: " << i->data->gender << endl;
+				cout << "\tBirth: " << i->data->day_of_birth << "/" << i->data->month_of_birth << "/" << i->data->year_of_birth << endl;
+				cout << "\tSocial ID: " << i->data->social_id << endl;
+				cout << "\t\tTotal Mark: " << i->data->score_board.totalMark << endl;
+				cout << "\t\tFinal Mark: " << i->data->score_board.finalMark << endl;
+				cout << "\t\tMidterm Mark: " << i->data->score_board.midtermMark << endl;
+				cout << "\t\tOther Mark: " << i->data->score_board.otherMark << endl;
+			}
+		}
+	}
+}
+
 void menu(School_year* school, Semester* se, course* c, Student* st, listStudent ls, listCourse lc)
 {
 	int type;
@@ -1637,6 +1670,7 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 		cout << "11. Delete a course.\n";
 		cout << "21. Export list of students in a course to a CSV file\n";
 		cout << "22. Import CSV file to the scoreboard of a course.\n";
+		cout << "23. View the scoreboard of a course.\n";
 		cout << "0.  Log out.\n";
 
 		do
@@ -1729,6 +1763,10 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 22:
 			{
 				ImportTheScoreboardOfACourse(se);
+			}
+			case 23:
+			{
+				ViewScoreBoardInACourse(se);
 			}
 			case 0:
 			{

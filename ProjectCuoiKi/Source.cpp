@@ -1564,7 +1564,7 @@ void ImportTheScoreboardOfACourse(Semester*& se)
 	char* courseID = new char;
 	char* courseName = new char;
 
-	ifstream ofile("ListStudentInACourse.csv");
+	ifstream ifile("ListStudentInACourse.csv");
 
 	cout << "	Enter the ID of course: ";
 	cin >> courseID;
@@ -1579,30 +1579,31 @@ void ImportTheScoreboardOfACourse(Semester*& se)
 		{
 			//skip first line
 			string skip_first_line;
-			getline(ofile, skip_first_line, '\n');
+			getline(ifile, skip_first_line, '\n');
 
 			//read data
 			Node* temp = k->data->list_student.pHead;
 
-			while (ofile.good())
+			while (ifile.good())
 			{
-				getline(ofile, temp->data->no, ',');
-				getline(ofile, temp->data->student_id, ',');
-				getline(ofile, temp->data->first_name, ',');
-				getline(ofile, temp->data->last_name, ',');
-				getline(ofile, temp->data->gender, ',');
-				getline(ofile, temp->data->day_of_birth, ',');
-				getline(ofile, temp->data->month_of_birth, ',');
-				getline(ofile, temp->data->year_of_birth, ',');
-				getline(ofile, temp->data->social_id, ',');
-				getline(ofile, temp->data->score_board.totalMark, ',');
-				getline(ofile, temp->data->score_board.finalMark, ',');
-				getline(ofile, temp->data->score_board.midtermMark, ',');
-				getline(ofile, temp->data->score_board.otherMark, '\n');
+				getline(ifile, temp->data->no, ',');
+				getline(ifile, temp->data->student_id, ',');
+				getline(ifile, temp->data->first_name, ',');
+				getline(ifile, temp->data->last_name, ',');
+				getline(ifile, temp->data->gender, ',');
+				getline(ifile, temp->data->day_of_birth, ',');
+				getline(ifile, temp->data->month_of_birth, ',');
+				getline(ifile, temp->data->year_of_birth, ',');
+				getline(ifile, temp->data->social_id, ',');
+				getline(ifile, temp->data->score_board.totalMark, ',');
+				getline(ifile, temp->data->score_board.finalMark, ',');
+				getline(ifile, temp->data->score_board.midtermMark, ',');
+				getline(ifile, temp->data->score_board.otherMark, '\n');
 				temp = temp->next;
 			}
 		}
 	}
+	ifile.close();
 }
 
 void ViewScoreBoardInACourse(Semester*& se)
@@ -1633,6 +1634,41 @@ void ViewScoreBoardInACourse(Semester*& se)
 				cout << "\t\tFinal Mark: " << i->data->score_board.finalMark << endl;
 				cout << "\t\tMidterm Mark: " << i->data->score_board.midtermMark << endl;
 				cout << "\t\tOther Mark: " << i->data->score_board.otherMark << endl;
+			}
+		}
+	}
+}
+
+void UpdateAStudentResult(Semester*& se)
+{
+	char* courseID = new char;
+	char* courseName = new char;
+
+	cout << "	Enter the ID of course: ";
+	cin >> courseID;
+
+	cout << "	Enter the name of course: ";
+	cin >> courseName;
+
+	for (NODE* k = se->pHead; k != NULL; k = k->pNext)
+	{
+		if (checkName(courseName, k->data->courseName) == true && checkName(courseID, k->data->courseID) == true)
+		{
+			string Student_ID;
+			cout << "\tEnter the Student ID: "; cin >> Student_ID;
+			for (Node* i = k->data->list_student.pHead; i != NULL; i = i->next)
+			{
+				if (Student_ID == i->data->student_id)
+				{
+					cout << "\t\tTotal Mark: "; cin >> i->data->score_board.totalMark;
+					cout << "\t\tFinal Mark: "; cin >> i->data->score_board.finalMark;
+					cout << "\t\tMidterm Mark: "; cin >> i->data->score_board.midtermMark;
+					cout << "\t\tOther Mark: "; cin >> i->data->score_board.otherMark;
+				}
+				else if (Student_ID != i->data->student_id && i->next == NULL)
+				{
+					cout << "No Student ID matching\n";
+				}
 			}
 		}
 	}
@@ -1671,6 +1707,7 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 		cout << "21. Export list of students in a course to a CSV file\n";
 		cout << "22. Import CSV file to the scoreboard of a course.\n";
 		cout << "23. View the scoreboard of a course.\n";
+		cout << "24. Update a student result.\n";
 		cout << "0.  Log out.\n";
 
 		do
@@ -1768,6 +1805,8 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			{
 				ViewScoreBoardInACourse(se);
 			}
+			case 24:
+				UpdateAStudentResult(se);
 			case 0:
 			{
 				menu(school, se, c, st, ls, lc);

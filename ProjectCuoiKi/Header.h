@@ -180,6 +180,7 @@ void outputListOfStudentsInACourse(listStudent ls);
 void outputListOfStudentsInACourseToCSVfile(Semester*& se);
 void ImportTheScoreboardOfACourse(Semester*& se);
 void ViewScoreBoardInACourse(Semester*& se);
+void UpdateAStudentResult(Semester*& se);
 
 //menu
 void menu(School_year* school, Semester* se, course* c, Student* st, listStudent ls, listCourse lc);

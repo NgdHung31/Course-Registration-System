@@ -118,8 +118,6 @@ void changePassword();
 bool checkName(char* name1, char* name2);
 bool checkDate(string day, string month, string year);
 const char* checkOrder(int n);
-bool checkStartDateInCourse(int day_course, int month_course, int day_semester, int month_semester);
-bool checkEndDateInCourse(int day_course, int month_course, int day_semester, int month_semester);
 const char* convertDay(int day);
 const char* convertSession(int session);
 

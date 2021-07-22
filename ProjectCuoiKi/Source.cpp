@@ -188,7 +188,7 @@ const char* convertSession(int session)
 	}
 }
 
-// 1 - 5
+//1 - 5
 void enterTheName(char*& name)
 {
 	cin.ignore();
@@ -1509,8 +1509,8 @@ void outputListOfStudentsInACourse(listStudent ls)
 		i++;
 	}
 }
-//21-25
 
+//21-25
 void outputListOfStudentsInACourseToCSVfile(Semester*& se)
 {
 	char* courseID = new char;

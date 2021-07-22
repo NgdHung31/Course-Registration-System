@@ -142,7 +142,7 @@ int main()
 		} while (choice1 != 0);
 	}
 
-	if (type == 2)
+	if (type == 1)
 	{
 		system("cls");
 		cout << "----------Student----------\n";

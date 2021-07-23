@@ -47,13 +47,13 @@ struct course
 	int firstSession;
 	int secondDay;
 	int secondSession;
-	// info course
+	//info course
 	char* courseID;
 	char* courseName;
 	char* teacherName;
 	int numberCredits;
 	int maxStudentCourse;
-	//List student enroll in course
+	//list student enroll in course
 	listStudent list_student;
 };
 
@@ -114,14 +114,14 @@ void registerAAcoount();
 bool checkLoggin(string username, string password);
 void changePassword();
 
-//Check&convert
+//Check & convert
 bool checkName(char* name1, char* name2);
 bool checkDate(string day, string month, string year);
 const char* checkOrder(int n);
 const char* convertDay(int day);
 const char* convertSession(int session);
 
-//1to5
+//1 - 5
 void enterTheNameOfClass(char*& name);
 void enterTheNameOfClass(char*& name);
 Student* infoStudent();
@@ -144,7 +144,7 @@ void removeHeadClass(Class*& cl);
 void removeTailClass(Class*& cl);
 bool removeStudent(School_year*& sy);
 
-// 6 - 11 
+//6 - 11 
 NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
@@ -176,7 +176,7 @@ void outputListOfStudentInAClass(School_year* sy, char* name);
 void outputListOfCourses(Semester* se);
 void outputListOfStudentsInACourse(listStudent ls);
 
-//21-26
+//21 - 26
 void outputListOfStudentsInACourseToCSVfile(Semester*& se);
 void ImportTheScoreboardOfACourse(Semester*& se);
 void ViewScoreBoardInACourse(Semester*& se);

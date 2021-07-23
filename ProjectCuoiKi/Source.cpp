@@ -68,7 +68,7 @@ void changePassword()
 }
 
 
-//CAC HAM KIEM TRA CHUYEN DOI
+//Check & convert
 bool checkDate(string day, string month, string year)
 {
 	if ((stoi(year) % 4 == 0 && stoi(year) % 100 != 0) || stoi(year) % 400 == 0)
@@ -646,7 +646,7 @@ bool removeStudent(School_year*& sy)
 
 }
 
-// 6-11
+//6 - 11
 NODE* createNodeCourse(course* data)
 {
 	NODE* p = new NODE;
@@ -783,7 +783,6 @@ void createSemester(Semester*& se)
 				}
 			} while ((checkDate(to_string(se->endDay), to_string(se->endMonth), to_string(se->schoolYear)) == false) || ((se->endMonth != 12) && (se->endMonth > 2)));
 		}
-
 	}
 	else
 	{
@@ -1160,46 +1159,44 @@ void deleteTail(Semester*& se)
 }
 
 bool deleteCourse(Semester * &se)
+{
+	char* ID;
+	cout << "\tEnter The ID: ";
+	cin.ignore();
+	char temp2[100];
+	cin.getline(temp2, 100);
+	ID = new char[strlen(temp2) + 1];
+	strcpy(ID, temp2);
+
+	NODE* temp1 = NULL;
+	for (NODE* temp = se->pHead; temp != NULL; temp = temp->pNext)
 	{
-		char* ID;
-		cout << "\tEnter The ID: ";
-		cin.ignore();
-		char temp2[100];
-		cin.getline(temp2, 100);
-		ID = new char[strlen(temp2) + 1];
-		strcpy(ID, temp2);
-
-		NODE* temp1 = NULL;
-		for (NODE* temp = se->pHead; temp != NULL; temp = temp->pNext)
+		if (checkName(ID, temp->data->courseID))
 		{
-			if (checkName(ID, temp->data->courseID))
+			if (temp == se->pHead)
 			{
-				if (temp == se->pHead)
-				{
-					deleteHead(se);
-					return true;
-				}
-				else if (temp == se->pTail)
-				{
-					deleteTail(se);
-					return true;
-				}
-				else
-				{
-					temp1->pNext = temp->pNext;
-					delete temp;
-					temp = temp1;
-					return true;
-				}
+				deleteHead(se);
+				return true;
 			}
-			temp1 = temp;
+			else if (temp == se->pTail)
+			{
+				deleteTail(se);
+				return true;
+			}
+			else
+			{
+				temp1->pNext = temp->pNext;
+				delete temp;
+				temp = temp1;
+				return true;
+			}
 		}
-		return false;
+		temp1 = temp;
 	}
+	return false;
+}
 
-
-
-	//12-20
+//12 - 20
 void initListStudent(listStudent & ls)
 {
 	ls.pHead = NULL;
@@ -1510,7 +1507,7 @@ void outputListOfStudentsInACourse(listStudent ls)
 	}
 }
 
-//21-25
+//21 - 25
 void outputListOfStudentsInACourseToCSVfile(Semester*& se)
 {
 	char* courseID = new char;
@@ -1555,7 +1552,6 @@ void outputListOfStudentsInACourseToCSVfile(Semester*& se)
 			}
 		}
 	}
-
 	ofile.close();
 }
 

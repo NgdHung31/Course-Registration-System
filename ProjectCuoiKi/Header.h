@@ -176,11 +176,13 @@ void outputListOfStudentInAClass(School_year* sy, char* name);
 void outputListOfCourses(Semester* se);
 void outputListOfStudentsInACourse(listStudent ls);
 
-//21-25
+//21-26
 void outputListOfStudentsInACourseToCSVfile(Semester*& se);
 void ImportTheScoreboardOfACourse(Semester*& se);
 void ViewScoreBoardInACourse(Semester*& se);
 void UpdateAStudentResult(Semester*& se);
+void ViewTheScoreboardOfAClass(School_year* school, Semester*& se);
+void ViewScoreboardOfAStudent(Semester*& se, Student*& st);
 
 //menu
 void menu(School_year* school, Semester* se, course* c, Student* st, listStudent ls, listCourse lc);

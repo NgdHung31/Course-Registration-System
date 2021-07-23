@@ -1674,6 +1674,84 @@ void UpdateAStudentResult(Semester*& se)
 	}
 }
 
+void ViewTheScoreboardOfAClass(School_year* school, Semester*& se)
+{
+	int no = 0;
+
+	float total_credits;
+	float total_score;
+	float overall_gpa = 0;
+
+	char* class_name = new char;
+	cout << "\tEnter the name of class: ";
+	cin >> class_name;
+
+	for (Node_class* i = school->head; i != NULL; i = i->next)
+	{
+		if (checkName(class_name, i->data->class_name) == true)
+		{
+			cout << "------------------------------------SCOREBOARD OF CLASS " << class_name << " ----------------------------------------\n";
+			for (Node* k = i->data->head; i != NULL; i++)
+			{
+				cout << "No: " << no++ << endl;
+				cout << "\tStudent ID: " << k->data->student_id << endl;
+				cout << "\tFullname: " << k->data->first_name << " " << k->data->last_name << endl;
+
+				total_credits = 0;
+				total_score = 0;
+
+				for (NODE* c = se->pHead; c != NULL; c = c->pNext)
+				{
+					for (Node* l = c->data->list_student.pHead; l != NULL; l = l->next)
+					{
+						if (l->data->student_id == k->data->student_id)
+						{
+							cout << "\t\tCourse: " << c->data->courseName << endl;
+							cout << "\t\t\Total Mark: " << l->data->score_board.totalMark << endl;
+							total_credits += c->data->numberCredits;
+							total_score += (c->data->numberCredits * atof(l->data->score_board.totalMark.c_str()));
+						}
+					}
+				}
+				cout << endl;
+				overall_gpa += total_score / total_credits;
+				cout << "\tGPA in semester " << se->createASemester << ": " << total_score / total_credits << endl;
+			}
+			overall_gpa = overall_gpa / (no + 1);
+
+			cout << "---------------------------------------------------------" << endl;
+			cout << "  OVERALL GPA OF " << class_name << ": " << overall_gpa << endl;
+			cout << "---------------------------------------------------------" << endl;
+		}
+	}
+}
+
+void ViewScoreboardOfAStudent(Semester*& se, Student*& st)
+{
+	float total_credits;
+	float total_score;
+	cout << "Scoreboard of " << st->last_name << " in this semester\n";
+
+	for (NODE* c = se->pHead; c != NULL; c = c->pNext)
+	{
+		for (Node* l = c->data->list_student.pHead; l != NULL; l = l->next)
+		{
+			if (l->data->student_id == st->student_id)
+			{
+				cout << "\tCourse: " << c->data->courseName << endl;
+				cout << "\t\tTotal Mark: " << l->data->score_board.totalMark << endl;
+				cout << "\t\tFinal Mark: " << l->data->score_board.finalMark << endl;
+				cout << "\t\tMidterm Mark: " << l->data->score_board.midtermMark << endl;
+				cout << "\t\tOther Mark: " << l->data->score_board.otherMark << endl;
+				total_credits += c->data->numberCredits;
+				total_score += (c->data->numberCredits * atof(l->data->score_board.totalMark.c_str()));
+			}
+			cout << endl;
+			cout << "GPA in semester " << se->createASemester << ": " << total_score / total_credits << endl;
+		}
+	}
+}
+
 void menu(School_year* school, Semester* se, course* c, Student* st, listStudent ls, listCourse lc)
 {
 	int type;
@@ -1708,6 +1786,7 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 		cout << "22. Import CSV file to the scoreboard of a course.\n";
 		cout << "23. View the scoreboard of a course.\n";
 		cout << "24. Update a student result.\n";
+		cout << "25. View the scoreboard of a class.\n";
 		cout << "0.  Log out.\n";
 
 		do
@@ -1800,13 +1879,21 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 22:
 			{
 				ImportTheScoreboardOfACourse(se);
+				break;
 			}
 			case 23:
 			{
 				ViewScoreBoardInACourse(se);
+				break;
 			}
 			case 24:
 				UpdateAStudentResult(se);
+				break;
+			case 25:
+			{
+				ViewTheScoreboardOfAClass(school, se);
+				break;
+			}
 			case 0:
 			{
 				menu(school, se, c, st, ls, lc);
@@ -1831,7 +1918,8 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 		cout << "17. View list of classes.\n";
 		cout << "18. View list of students in a class (for example, 20APCS1...)\n";
 		cout << "19. View list of courses.\n";
-		cout << "20. View list of students in a course.";
+		cout << "20. View list of students in a course.\n";
+		cout << "26. View your scoreboard.\n";
 
 		do
 		{
@@ -1920,6 +2008,11 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 20:
 			{
 				outputListOfStudentsInACourse(ls);
+				break;
+			}
+			case 26:
+			{
+				ViewScoreboardOfAStudent(se, st);
 				break;
 			}
 			}

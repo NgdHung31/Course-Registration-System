@@ -668,7 +668,7 @@ void createASemester(Semester*& se)
 
 void createSemester(Semester*& se)
 {
-	cout << "------------------------------------------------CREATE YOUR SEMESTER:---------------------------------------------------" << endl;
+	cout << "-------------------------- CREATE YOUR SEMESTER ---------------------------" << endl;
 	cout << "Let's create a semester: 1, 2, or 3: ";
 	cin >> se->createASemester;
 
@@ -947,7 +947,7 @@ void outputCourse(course* c)
 
 void printList(Semester*& se)
 {
-	cout << "\n\t********************VIEW LIST OF COURSE************************" << endl;
+	cout << "\n\t---------------------- VIEW LIST OF COURSE ------------------------" << endl;
 	cout << "\t\t\t\tSEMESTER " << se->createASemester << endl;
 	cout << "\t\t\t\t" << se->startDay << "/" << se->startMonth << " - " << se->endDay << "/" << se->endMonth << endl;
 
@@ -1849,6 +1849,7 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			}
 			case 8:
 			{
+				course* c = new course;
 				c = createACourse(se, c);
 				break;
 			}

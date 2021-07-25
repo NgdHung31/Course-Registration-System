@@ -120,6 +120,8 @@ bool checkDate(string day, string month, string year);
 const char* checkOrder(int n);
 const char* convertDay(int day);
 const char* convertSession(int session);
+bool checkStartDateToRegistrationSession(string day_course, string month_course, string day_semester, string month_semester);
+bool checkEndDateToRegistrationSession(string day_courseS, string month_courseS, string day_courseE, string month_courseE, string day_semester, string month_semester);
 
 //1 - 5
 void enterTheNameOfClass(char*& name);
@@ -149,7 +151,7 @@ NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
-void createACourseRegistrationSession(Semester* se, course*& c, session& ss);
+void createACourseRegistrationSession(Semester* se, session& ss);
 course* createACourse(Semester*& se, course* c);
 void outputCourse(course* c);
 void printList(Semester*& se);

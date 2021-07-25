@@ -188,6 +188,35 @@ const char* convertSession(int session)
 	}
 }
 
+bool checkStartDateToRegistrationSession(string day_course, string month_course, string day_semester, string month_semester)
+{
+	if (stoi(month_course) < stoi(month_semester))
+	{
+		return true;
+	}
+	else if (stoi(month_course) == stoi(month_semester) && stoi(day_course) <= stoi(day_semester))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool checkEndDateToRegistrationSession(string day_courseS, string month_courseS, string day_courseE, string month_courseE, string day_semester, string month_semester)
+{
+	if (stoi(month_courseS) <= stoi(month_courseE) && stoi(month_courseE) <= stoi(month_semester))
+	{
+		if (stoi(month_courseS) == stoi(month_courseE) && stoi(day_courseS) <= stoi(day_courseE))
+		{
+			return true;
+		}
+		else if (stoi(month_courseE) == stoi(month_semester) && stoi(day_courseE) <= stoi(day_semester))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 //1 - 5
 void enterTheName(char*& name)
 {
@@ -674,7 +703,7 @@ void createSemester(Semester*& se)
 
 	if (1 <= se->createASemester && se->createASemester <= 3)
 	{
-		cout << "\nNow, your semester is " << se->createASemester << ".";
+		cout << "\nNow, your semester is " << se->createASemester << ". ";
 		if (se->createASemester == 1)
 		{
 			cout << "Fall";
@@ -809,7 +838,7 @@ void addTail(Semester*& se, course* c)
 	}
 }
 
-void createACourseRegistrationSession(Semester* se, course*& c, session& ss) //tao mot phien dang ky khoa hoc
+void createACourseRegistrationSession(Semester* se, session& ss) 
 {
 	cout << "\n-------------------- COURSE REGISTRATION SESSION DEADLINE ----------------------" << endl;
 	cout << "\t\t\t\t\t\tSEMESTER " << se->createASemester << endl;
@@ -826,7 +855,11 @@ void createACourseRegistrationSession(Semester* se, course*& c, session& ss) //t
 		{
 			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
 		}
-	} while (!checkDate(to_string(ss.startDay0), to_string(ss.startMonth0), to_string(se->schoolYear)));
+		else if (checkStartDateToRegistrationSession(to_string(ss.startDay0), to_string(ss.startMonth0), to_string(se->startDay), to_string(se->startMonth)) == false)
+		{
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (!checkDate(to_string(ss.startDay0), to_string(ss.startMonth0), to_string(se->schoolYear)) || !checkStartDateToRegistrationSession(to_string(ss.startDay0), to_string(ss.startMonth0), to_string(se->startDay), to_string(se->startMonth)));
 
 	cout << "Enter the end date course registration session: " << endl;
 	do
@@ -839,10 +872,14 @@ void createACourseRegistrationSession(Semester* se, course*& c, session& ss) //t
 		{
 			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
 		}
-	} while (!checkDate(to_string(ss.endDay0), to_string(ss.endMonth0), to_string(se->schoolYear)));
+		else if (checkEndDateToRegistrationSession(to_string(ss.startDay0), to_string(ss.startMonth0), to_string(ss.endDay0), to_string(ss.endMonth0), to_string(se->startDay), to_string(se->startMonth)) == false)
+		{
+			cout << "FAULT!!! PLEASE RE-ENTER." << endl;
+		}
+	} while (!checkDate(to_string(ss.endDay0), to_string(ss.endMonth0), to_string(se->schoolYear)) || !checkEndDateToRegistrationSession(to_string(ss.startDay0), to_string(ss.startMonth0), to_string(ss.endDay0), to_string(ss.endMonth0), to_string(se->startDay), to_string(se->startMonth)));
 }
 
-course* createACourse(Semester*& se, course* c) //tao mot khoa hoc
+course* createACourse(Semester*& se, course* c)
 {
 	cout << "--------------------- CREATE YOUR COURSE ----------------------" << endl;
 
@@ -927,7 +964,7 @@ course* createACourse(Semester*& se, course* c) //tao mot khoa hoc
 		}
 	} while (c->secondSession < 1 || c->secondSession > 4);
 
-	addTail(se, c); //them mot khoa hoc vao danh sach cac khoa hoc
+	addTail(se, c);
 
 	return c;
 }
@@ -1724,8 +1761,8 @@ void ViewTheScoreboardOfAClass(School_year* school, Semester*& se)
 
 void ViewScoreboardOfAStudent(Semester*& se, Student*& st)
 {
-	float total_credits;
-	float total_score;
+	float total_credits = 0;
+	float total_score = 0;
 	cout << "Scoreboard of " << st->last_name << " in this semester\n";
 
 	for (NODE* c = se->pHead; c != NULL; c = c->pNext)
@@ -1844,12 +1881,12 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 7:
 			{
 				session ss;
-				createACourseRegistrationSession(se, c, ss);
+				createACourseRegistrationSession(se, ss);
 				break;
 			}
 			case 8:
 			{
-				course* c = new course;
+				c = new course;
 				c = createACourse(se, c);
 				break;
 			}

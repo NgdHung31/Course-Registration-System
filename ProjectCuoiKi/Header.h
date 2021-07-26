@@ -142,9 +142,6 @@ void printAllClass(School_year* sy);
 void removeHeadSchoolYear(School_year*& sy);
 void removeTailSchoolYear(School_year*& sy);
 bool removeClass(School_year*& sy);
-void removeHeadClass(Class*& cl);
-void removeTailClass(Class*& cl);
-bool removeStudent(School_year*& sy);
 
 //6 - 11 
 NODE* createNodeCourse(course* data);

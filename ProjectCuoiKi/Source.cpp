@@ -587,93 +587,7 @@ bool removeClass(School_year*& sy)
 	return false;
 }
 
-void removeHeadClass(Class*& cl)
-{
-	if (cl->head == NULL)
-	{
-		return;
-	}
-	else
-	{
-		Node* p = cl->head;
-		cl->head = cl->head->next;
-		delete p;
-	}
-}
 
-void removeTailClass(Class*& cl)
-{
-	if (cl->head == NULL)
-	{
-		return;
-	}
-	if (cl->head->next == NULL)
-	{
-		removeHeadClass(cl);
-	}
-	else
-	{
-		for (Node* k = cl->head; k != NULL; k = k->next)
-		{
-			if (k->next == cl->tail)
-			{
-				delete cl->tail;
-				k->next = NULL;
-				cl->tail = k;
-			}
-		}
-	}
-
-}
-
-bool removeStudent(School_year*& sy)
-{
-	char* name;
-	enterTheName(name);
-	for (Node_class* temp = sy->head; temp != NULL; temp = temp->next)
-	{
-		if (checkName(temp->data->class_name, name))
-		{
-			Class* cl = temp->data;
-			Node* temp2 = new Node;
-			char* firstname;
-			cout << "The first name_";
-			enterTheName(firstname);
-			char* lastname;
-			cout << "The last name_";
-			enterTheName(lastname);
-			for (Node* temp1 = cl->head; temp1 != NULL; temp1 = temp1->next)
-			{
-				if (temp1->data->first_name.compare(firstname) == 0)
-				{
-					if (temp1->data->last_name.compare(lastname) == 0)
-					{
-						if (temp1 == cl->head)
-						{
-							removeHeadClass(cl);
-							return true;
-						}
-						else if (temp1 == cl->tail)
-						{
-							removeTailClass(cl);
-							return true;
-						}
-						else
-						{
-							temp2->next = temp1->next;
-							delete temp1;
-							temp1 = temp2;
-							return true;
-						}
-					}
-				}
-				temp2 = temp1;
-			}
-			return false;
-		}
-	}
-
-}
 
 //6 - 11
 NODE* createNodeCourse(course* data)
@@ -1808,7 +1722,6 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 		cout << "5.  He/she want to see list student.\n";
 		cout << "51. He/she want to see all classes\n";
 		cout << "52. He/she want to remove the class.\n";
-		cout << "53. He/she want to remove the student.\n";
 		cout << "6.  Create a semester.\n";
 		cout << "7.  Create a course registration session.\n";
 		cout << "8.  Add a course to this semester.\n";
@@ -1866,11 +1779,6 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 52:
 			{
 				removeClass(school);
-				break;
-			}
-			case 53:
-			{
-				removeStudent(school);
 				break;
 			}
 			case 6:

@@ -1817,6 +1817,7 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 21:
 			{
 				outputListOfStudentsInACourseToCSVfile(se);
+				cout << "Done !\n";
 				break;
 			}
 			case 22:

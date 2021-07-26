@@ -120,8 +120,6 @@ bool checkDate(string day, string month, string year);
 const char* checkOrder(int n);
 const char* convertDay(int day);
 const char* convertSession(int session);
-bool checkStartDateToRegistrationSession(string day_course, string month_course, string day_semester, string month_semester);
-bool checkEndDateToRegistrationSession(string day_courseS, string month_courseS, string day_courseE, string month_courseE, string day_semester, string month_semester);
 
 //1 - 5
 void enterTheNameOfClass(char*& name);
@@ -142,13 +140,16 @@ void printAllClass(School_year* sy);
 void removeHeadSchoolYear(School_year*& sy);
 void removeTailSchoolYear(School_year*& sy);
 bool removeClass(School_year*& sy);
+void removeHeadClass(Class*& cl);
+void removeTailClass(Class*& cl);
+bool removeStudent(School_year*& sy);
 
 //6 - 11 
 NODE* createNodeCourse(course* data);
 void createASemester(Semester*& se);
 void createSemester(Semester*& se);
 void addTail(Semester*& se, course* c);
-void createACourseRegistrationSession(Semester* se, session& ss);
+void createACourseRegistrationSession(Semester* se, course*& c, session& ss);
 course* createACourse(Semester*& se, course* c);
 void outputCourse(course* c);
 void printList(Semester*& se);
@@ -165,7 +166,7 @@ bool checkExistingCourse(listCourse& lc, int cFirstDay, int cFirstSession, int c
 void addTailStudent(listStudent& ls, Node* p);
 void addTailCourse(listCourse& lc, NODE* k);
 Node* createNodeStudent(Student* data);
-void outputListOfEnrolledCourse(listCourse lc);
+void outputListOfStudentsInACourse(listStudent ls, listCourse lc);
 void deleteHeadCourse(listCourse& lc);
 void deleteTailCourse(listCourse& lc);
 void removeACourseFromEnrolledList(listCourse& lc);
@@ -173,7 +174,7 @@ void outputListOfYourCourse(listCourse lc);
 void outputListOfClasses(School_year* sy);
 void outputListOfStudentInAClass(School_year* sy, char* name);
 void outputListOfCourses(Semester* se);
-void outputListOfStudentsInACourse(listStudent ls);
+void outputListOfStudentsInACourse(listStudent ls, listCourse lc);
 
 //21 - 26
 void outputListOfStudentsInACourseToCSVfile(Semester*& se);

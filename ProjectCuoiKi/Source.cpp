@@ -1197,6 +1197,7 @@ void enrollACourse(Semester * &se, Student * &st, listStudent & ls, listCourse &
 					cout << "		Enroll successfully!";
 					Node* p = createNodeStudent(st);
 					addTailStudent(ls, p);
+					addTailStudent(k->data->list_student, p);
 					NODE* q = createNodeCourse(k->data);
 					addTailCourse(lc, q);
 				}
@@ -1212,6 +1213,7 @@ void enrollACourse(Semester * &se, Student * &st, listStudent & ls, listCourse &
 						cout << "		Enroll successfully!";
 						Node* p = createNodeStudent(st);
 						addTailStudent(ls, p);
+						addTailStudent(k->data->list_student, p);
 						NODE* q = createNodeCourse(k->data);
 						addTailCourse(lc, q);
 					}

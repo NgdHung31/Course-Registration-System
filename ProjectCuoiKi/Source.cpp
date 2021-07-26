@@ -1623,6 +1623,7 @@ void UpdateAStudentResult(Semester*& se)
 
 void ViewTheScoreboardOfAClass(School_year* school, Semester*& se)
 {
+	
 	int no = 0;
 
 	float total_credits;

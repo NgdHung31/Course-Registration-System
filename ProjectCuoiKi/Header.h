@@ -156,7 +156,6 @@ void updateInformation(Semester*& se);
 void deleteHead(Semester*& se);
 void deleteTail(Semester*& se);
 bool deleteCourse(Semester*& se);
-
 //12 - 20
 void initListStudent(listStudent& ls);
 void initListCourse(listCourse& lc);

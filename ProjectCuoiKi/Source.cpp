@@ -1920,11 +1920,13 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 21:
 			{
 				outputListOfStudentsInACourseToCSVfile(se);
+				cout << "Done !\n";
 				break;
 			}
 			case 22:
 			{
 				ImportTheScoreboardOfACourse(se);
+				cout << "Done !\n";
 				break;
 			}
 			case 23:
@@ -2054,7 +2056,6 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 20:
 			{
 				outputListOfStudentsInACourse(ls,lc);
-				cout << "Done !\n";
 				break;
 			}
 			case 26:

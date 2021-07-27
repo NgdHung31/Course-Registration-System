@@ -1737,7 +1737,7 @@ void ViewTheScoreboardOfAClass(School_year* school, Semester*& se)
 		if (checkName(class_name, i->data->class_name) == true)
 		{
 			cout << "------------------------------------SCOREBOARD OF CLASS " << class_name << " ----------------------------------------\n";
-			for (Node* k = i->data->head; i != NULL; i++)
+			for (Node* k = i->data->head; i != NULL; i=i->next)
 			{
 				cout << "No: " << no++ << endl;
 				cout << "\tStudent ID: " << k->data->student_id << endl;

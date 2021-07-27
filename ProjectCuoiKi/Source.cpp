@@ -1728,16 +1728,17 @@ void ViewTheScoreboardOfAClass(School_year* school, Semester*& se)
 	float total_score;
 	float overall_gpa = 0;
 
-	char* class_name = new char;
+	char class_name[20];
+	cin.ignore();
 	cout << "\tEnter the name of class: ";
-	cin >> class_name;
-
-	for (Node_class* i = school->head; i != NULL; i = i->next)
+	cin.getline(class_name, 20, '\n');
+	
+	for (Node_class* temp = school->head; temp != NULL; temp = temp->next)
 	{
-		if (checkName(class_name, i->data->class_name) == true)
+		if (checkName(class_name, temp->data->class_name) == true)
 		{
 			cout << "------------------------------------SCOREBOARD OF CLASS " << class_name << " ----------------------------------------\n";
-			for (Node* k = i->data->head; i != NULL; i=i->next)
+			for (Node* k = temp->data->head; k != NULL; k=k->next)
 			{
 				cout << "No: " << no++ << endl;
 				cout << "\tStudent ID: " << k->data->student_id << endl;
@@ -1927,7 +1928,6 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 22:
 			{
 				ImportTheScoreboardOfACourse(se);
-				cout << "Done !\n";
 				break;
 			}
 			case 23:

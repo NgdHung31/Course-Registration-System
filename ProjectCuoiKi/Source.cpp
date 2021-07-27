@@ -1598,6 +1598,7 @@ void outputListOfStudentsInACourseToCSVfile(Semester*& se)
 				ofile << q->data->year_of_birth << ",";
 				ofile << q->data->social_id << "\n";
 			}
+			cout << "Done !\n";
 		}
 	}
 	ofile.close();
@@ -1628,7 +1629,7 @@ void ImportTheScoreboardOfACourse(Semester*& se)
 			//read data
 			Node* temp = k->data->list_student.pHead;
 
-			while (ifile.good())
+			while (temp != NULL)
 			{
 				getline(ifile, temp->data->no, ',');
 				getline(ifile, temp->data->student_id, ',');
@@ -1645,6 +1646,7 @@ void ImportTheScoreboardOfACourse(Semester*& se)
 				getline(ifile, temp->data->score_board.otherMark, '\n');
 				temp = temp->next;
 			}
+			cout << "Done !\n";
 		}
 	}
 	ifile.close();
@@ -1920,7 +1922,6 @@ void menu(School_year* school, Semester* se, course* c, Student* st, listStudent
 			case 21:
 			{
 				outputListOfStudentsInACourseToCSVfile(se);
-				cout << "Done !\n";
 				break;
 			}
 			case 22:
